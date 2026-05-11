@@ -1,0 +1,1948 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>にほんご Flash</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --green:#F05485;--green-sh:#8e006f;
+  --blue:#1CB0F6;--blue-dk:#0A9DD6;
+  --red:#FF4B4B;--orange:#FF9600;
+  --yellow:#FFD900;
+  --bg:#0F1923;--bg2:#141F2C;
+  --card:#1A2940;--card2:#1F3350;--card3:#243C60;
+  --border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.14);
+  --text:#FFF;--text2:#8FA8C0;--text3:#4A6B82;
+  --r:14px;--rl:20px;--rxl:26px;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+html,body{height:100%;overflow:hidden;}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);display:flex;flex-direction:column;align-items:center;}
+
+.scr{width:100%;max-width:480px;height:100vh;display:none;flex-direction:column;overflow:hidden;position:absolute;top:0;left:50%;transform:translateX(-50%);}
+.scr.on{display:flex;}
+
+/* HOME */
+#s-home{overflow-y:auto;}
+.home-top{padding:40px 20px 12px;text-align:center;flex-shrink:0;}
+.logo{font-size:50px;display:block;animation:bob 3s ease-in-out infinite;}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.home-title{font-size:27px;font-weight:900;background:linear-gradient(120deg,#58CC02,#1CB0F6,#CE82FF);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-top:6px;}
+.home-sub{font-size:13px;color:var(--text2);font-weight:700;margin-top:3px;}
+
+.strip{display:flex;gap:10px;padding:12px 20px;overflow-x:auto;flex-shrink:0;scrollbar-width:none;}
+.strip::-webkit-scrollbar{display:none;}
+.pill{background:var(--card);border:1.5px solid var(--border2);border-radius:var(--r);padding:10px 16px;display:flex;flex-direction:column;align-items:center;gap:2px;flex-shrink:0;}
+.pill-ico{font-size:18px;}
+.pill-num{font-size:18px;font-weight:900;}
+.pill-lbl{font-size:10px;color:var(--text2);font-weight:800;text-transform:uppercase;letter-spacing:.08em;}
+
+.sec{font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.1em;color:var(--text3);padding:12px 20px 8px;}
+
+.mode-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 20px 8px;}
+.mtile{background:var(--card);border:2px solid var(--border);border-radius:var(--rl);padding:16px 12px;cursor:pointer;text-align:center;transition:all .12s;}
+.mtile:active{transform:scale(.96);}
+.mtile.sel{border-color:var(--blue);background:rgba(28,176,246,.08);}
+.mt-ico{font-size:26px;margin-bottom:6px;}
+.mt-name{font-size:13px;font-weight:800;}
+.mt-desc{font-size:11px;color:var(--text2);font-weight:600;margin-top:2px;}
+
+.bab-list{display:flex;flex-direction:column;gap:8px;padding:0 20px 32px;}
+.bab{background:var(--card);border:1.5px solid var(--border);border-radius:var(--rl);padding:14px 16px;display:flex;align-items:center;gap:14px;cursor:pointer;transition:all .12s;}
+.bab:active{transform:scale(.98);}
+.bab-ico{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px;font-weight:900;}
+.bab-info{flex:1;min-width:0;}
+.bab-name{font-size:15px;font-weight:800;}
+.bab-cnt{font-size:12px;color:var(--text2);font-weight:600;margin-top:2px;}
+.bab-bar{height:5px;background:rgba(255,255,255,.08);border-radius:3px;margin-top:6px;overflow:hidden;}
+.bab-fill{height:100%;border-radius:3px;transition:width .5s;}
+.bab-pct{font-size:11px;font-weight:800;padding:3px 9px;border-radius:20px;flex-shrink:0;}
+
+/* GAME */
+#s-game{background:var(--bg);}
+.g-hdr{display:flex;align-items:center;gap:10px;padding:14px 16px;flex-shrink:0;}
+.g-back{width:38px;height:38px;border-radius:10px;background:var(--card);border:none;color:var(--text);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.g-pw{flex:1;height:9px;background:var(--card2);border-radius:5px;overflow:hidden;}
+.g-pf{height:100%;background:linear-gradient(90deg,var(--green),#7CEC3A);border-radius:5px;transition:width .4s cubic-bezier(.34,1.56,.64,1);}
+.g-xp{font-size:13px;font-weight:800;color:var(--yellow);flex-shrink:0;}
+
+.g-body{flex:1;overflow-y:auto;padding:8px 16px 0;display:flex;flex-direction:column;}
+.g-foot{padding:10px 16px 24px;flex-shrink:0;}
+
+.qbadge{font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.1em;color:var(--text3);margin-bottom:10px;}
+.qtxt{font-size:14px;font-weight:700;color:var(--text2);margin-bottom:10px;line-height:1.5;}
+
+/* WORD CARD */
+.wcard{background:linear-gradient(145deg,var(--card2),var(--card3));border:1.5px solid var(--border2);border-radius:var(--rxl);padding:22px 20px;text-align:center;margin-bottom:14px;flex-shrink:0;}
+.wcard img{width:76px;height:76px;object-fit:contain;margin:0 auto 10px;display:block;border-radius:10px;}
+.wjp{font-family:'Noto Sans JP',sans-serif;font-size:44px;font-weight:700;line-height:1.1;margin-bottom:6px;}
+.wroma{font-size:15px;color:var(--green);font-weight:700;}
+.warti{font-size:24px;font-weight:900;}
+
+/* FLIP */
+.fp{perspective:1000px;margin-bottom:14px;cursor:pointer;flex-shrink:0;}
+.fi{position:relative;transform-style:preserve-3d;transition:transform .5s cubic-bezier(.4,0,.2,1);border-radius:var(--rxl);}
+.fi.flipped{transform:rotateY(180deg);}
+.ff,.fb{backface-visibility:hidden;border-radius:var(--rxl);padding:26px 20px;min-height:180px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;}
+.ff{background:linear-gradient(145deg,var(--card2),var(--card3));border:1.5px solid rgba(88,204,2,.2);}
+.fb{position:absolute;inset:0;transform:rotateY(180deg);background:linear-gradient(145deg,#1A3A50,#1E4060);border:1.5px solid rgba(28,176,246,.25);}
+.fhint{font-size:11px;color:var(--text3);font-weight:700;margin-top:10px;}
+
+/* MCQ */
+.opts{display:flex;flex-direction:column;gap:9px;margin-top:4px;}
+.opt{background:var(--card);border:2px solid var(--border2);border-radius:var(--r);padding:14px 16px;font-size:15px;font-weight:700;color:var(--text);cursor:pointer;text-align:left;display:flex;align-items:center;gap:12px;transition:all .12s;font-family:'Nunito',sans-serif;width:100%;}
+.opt:active:not(:disabled){transform:scale(.98);}
+.olbl{width:30px;height:30px;border-radius:9px;background:rgba(255,255,255,.07);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;flex-shrink:0;}
+.opt.c-ok{border-color:var(--green);background:rgba(88,204,2,.1);}
+.opt.c-ok .olbl{background:var(--green);color:#000;}
+.opt.c-ng{border-color:var(--red);background:rgba(255,75,75,.1);}
+.opt.c-ng .olbl{background:var(--red);color:#fff;}
+
+/* TYPING */
+.tinp{width:100%;background:var(--card);border:2px solid var(--border2);border-radius:var(--r);padding:16px 18px;font-size:19px;font-weight:700;color:var(--text);font-family:'Nunito',sans-serif;outline:none;transition:border-color .2s;text-align:center;margin-top:6px;}
+.tinp:focus{border-color:var(--blue);}
+.tinp.ok{border-color:var(--green);background:rgba(88,204,2,.08);}
+.tinp.ng{border-color:var(--red);background:rgba(255,75,75,.08);}
+.thint{font-size:12px;color:var(--text3);text-align:center;margin-top:6px;font-weight:600;}
+
+/* VISUAL */
+.vgrid{display:grid;grid-template-columns:1fr 1fr;gap:9px;}
+.vtile{background:var(--card);border:2px solid var(--border);border-radius:var(--rl);padding:16px 10px;text-align:center;cursor:pointer;transition:all .12s;}
+.vtile:active{transform:scale(.96);}
+.vtile img{width:52px;height:52px;object-fit:contain;margin:0 auto 8px;display:block;border-radius:8px;}
+.vtjp{font-family:'Noto Sans JP',sans-serif;font-size:20px;font-weight:700;margin-bottom:4px;}
+.vtroma{font-size:11px;color:var(--text2);font-weight:700;}
+.vtile.c-ok{border-color:var(--green);background:rgba(88,204,2,.1);}
+.vtile.c-ng{border-color:var(--red);background:rgba(255,75,75,.1);}
+
+/* LISTEN */
+.lcard{background:linear-gradient(135deg,#1A3A5C,#0F2A45);border:1.5px solid rgba(28,176,246,.25);border-radius:var(--rxl);padding:26px 20px;text-align:center;margin-bottom:14px;cursor:pointer;transition:all .15s;flex-shrink:0;}
+.lcard:active{transform:scale(.97);}
+.lico{font-size:42px;margin-bottom:8px;}
+.llbl{font-size:14px;font-weight:800;color:var(--blue);}
+
+/* ORDER */
+.otgt{min-height:52px;background:var(--card);border:2px dashed rgba(255,255,255,.12);border-radius:var(--r);padding:8px;display:flex;flex-wrap:wrap;gap:7px;align-items:center;margin-bottom:12px;transition:border-color .2s;}
+.otgt.has{border-style:solid;border-color:rgba(28,176,246,.3);}
+.opool{display:flex;flex-wrap:wrap;gap:7px;}
+.chip{background:var(--card2);border:1.5px solid var(--border2);border-radius:9px;padding:9px 13px;font-size:16px;font-weight:700;cursor:pointer;transition:all .12s;font-family:'Noto Sans JP',sans-serif;user-select:none;}
+.chip:active{transform:scale(.94);}
+.chip.used{opacity:.2;pointer-events:none;}
+.chip.int{background:rgba(28,176,246,.12);border-color:rgba(28,176,246,.4);cursor:pointer;}
+
+/* RESULT */
+.rbox{border-radius:var(--rl);padding:14px 16px;margin-top:10px;animation:su .3s cubic-bezier(.34,1.56,.64,1);}
+@keyframes su{from{transform:translateY(16px);opacity:0}to{transform:translateY(0);opacity:1}}
+.rbox.ok{background:rgba(88,204,2,.08);border:1.5px solid rgba(88,204,2,.25);}
+.rbox.ng{background:rgba(255,75,75,.06);border:1.5px solid rgba(255,75,75,.2);}
+.rtitle{font-size:17px;font-weight:900;margin-bottom:3px;}
+.rtitle.ok{color:var(--green);}
+.rtitle.ng{color:var(--red);}
+.rans{font-size:14px;color:var(--text2);font-weight:600;}
+
+/* BTN */
+.abtn{width:100%;padding:17px;border-radius:var(--r);border:none;font-size:16px;font-weight:900;cursor:pointer;font-family:'Nunito',sans-serif;transition:all .1s;letter-spacing:.02em;}
+.abtn.green{background:var(--green);color:#000;box-shadow:0 4px 0 var(--green-sh);}
+.abtn.green:active:not(:disabled){transform:translateY(2px);box-shadow:0 2px 0 var(--green-sh);}
+.abtn.green:disabled{background:var(--card2);color:var(--text3);box-shadow:none;cursor:default;}
+.abtn.blue{background:var(--blue);color:#fff;box-shadow:0 4px 0 var(--blue-dk);}
+.abtn.blue:active{transform:translateY(2px);box-shadow:0 2px 0 var(--blue-dk);}
+
+/* DONE */
+#s-done{align-items:center;justify-content:center;padding:40px 24px;text-align:center;overflow-y:auto;}
+.dtrophy{font-size:78px;margin-bottom:12px;animation:bi .6s cubic-bezier(.34,1.56,.64,1);}
+@keyframes bi{0%{transform:scale(0);opacity:0}100%{transform:scale(1);opacity:1}}
+.dtitle{font-size:30px;font-weight:900;margin-bottom:6px;}
+.dsub{font-size:14px;color:var(--text2);font-weight:600;margin-bottom:28px;}
+.dstats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;width:100%;margin-bottom:28px;}
+.ds{background:var(--card);border-radius:var(--r);padding:14px 6px;border:1.5px solid var(--border);}
+.dsn{font-size:22px;font-weight:900;}
+.dsl{font-size:10px;color:var(--text2);font-weight:800;text-transform:uppercase;letter-spacing:.06em;margin-top:2px;}
+.dbtns{display:flex;flex-direction:column;gap:10px;width:100%;}
+
+/* FX */
+.ptcl{position:fixed;pointer-events:none;animation:fall 1.6s forwards;z-index:999;}
+@keyframes fall{0%{transform:translateY(-20px) rotate(0deg);opacity:1}100%{transform:translateY(105vh) rotate(720deg);opacity:0}}
+.xppop{position:fixed;font-size:17px;font-weight:900;color:var(--yellow);animation:rise 1s forwards;pointer-events:none;z-index:999;}
+@keyframes rise{0%{opacity:1;transform:translate(-50%,0)}100%{opacity:0;transform:translate(-50%,-60px)}}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-7px)}40%{transform:translateX(7px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
+.shake{animation:shake .35s ease;}
+
+::-webkit-scrollbar{width:3px;}
+::-webkit-scrollbar-thumb{background:var(--card3);border-radius:2px;}
+</style>
+</head>
+<body>
+
+<!-- HOME -->
+<div class="scr on" id="s-home">
+  <div class="home-top">
+    <span class="logo"><img src="https://img.icons8.com/?size=100&id=ramdnFvwXw8r&format=png&color=000000" alt="Logo Icons8"></span>
+    <div class="home-title">にほんご Flash</div>
+    <div class="home-sub">Belajar Bahasa Jepang — Bab 1 sampai 50</div>
+  </div>
+  <div class="strip">
+    <div class="pill"><div class="pill-ico">⭐</div><div class="pill-num" id="hxp">0</div><div class="pill-lbl">XP</div></div>
+    <div class="pill"><div class="pill-ico">✅</div><div class="pill-num" id="hok">0</div><div class="pill-lbl">Benar</div></div>
+    <div class="pill"><div class="pill-ico">📚</div><div class="pill-num" id="hwrd">0</div><div class="pill-lbl">Dipelajari</div></div>
+  </div>
+  <div class="sec">Mode Latihan</div>
+  <div class="mode-grid" id="mgrid">
+    <div class="mtile sel" data-m="mcq" onclick="setMode('mcq',this)"><div class="mt-ico">🎯</div><div class="mt-name">Pilihan Ganda</div><div class="mt-desc">4 pilihan jawaban</div></div>
+    <div class="mtile" data-m="flip" onclick="setMode('flip',this)"><div class="mt-ico">🃏</div><div class="mt-name">Flip Card</div><div class="mt-desc">Bolak-balik kartu</div></div>
+    <div class="mtile" data-m="typing" onclick="setMode('typing',this)"><div class="mt-ico">⌨️</div><div class="mt-name">Ketik Jawaban</div><div class="mt-desc">Tulis artinya</div></div>
+    <div class="mtile" data-m="visual" onclick="setMode('visual',this)"><div class="mt-ico">🖼️</div><div class="mt-name">Visual Match</div><div class="mt-desc">Cocokkan gambar</div></div>
+    <div class="mtile" data-m="listen" onclick="setMode('listen',this)"><div class="mt-ico">🔊</div><div class="mt-name">Dengarkan</div><div class="mt-desc">Tebak dari suara</div></div>
+    <div class="mtile" data-m="order" onclick="setMode('order',this)"><div class="mt-ico">🔀</div><div class="mt-name">Susun Kata</div><div class="mt-desc">Atur urutannya</div></div>
+  </div>
+  <div class="sec">Aksi Cepat</div>
+  <div style="display:flex;gap:10px;padding:0 20px 8px;">
+    <button onclick="startRandom()" style="flex:1;background:linear-gradient(135deg,#CE82FF,#1CB0F6);border:none;border-radius:14px;padding:14px;font-size:13px;font-weight:800;color:#fff;cursor:pointer;font-family:'Nunito',sans-serif;">🎲 Acak Semua Bab</button>
+    <button onclick="startReview()" style="flex:1;background:var(--card);border:1.5px solid var(--border2);border-radius:14px;padding:14px;font-size:13px;font-weight:800;color:var(--text2);cursor:pointer;font-family:'Nunito',sans-serif;">📋 Review (<span id="review-cnt">0</span>)</button>
+  </div>
+  <div style="display:flex;gap:10px;padding:0 20px 12px;">
+    <button onclick="showStats()" style="flex:1;background:var(--card);border:1.5px solid var(--border2);border-radius:14px;padding:12px;font-size:13px;font-weight:800;color:var(--text2);cursor:pointer;font-family:'Nunito',sans-serif;">📊 Statistik</button>
+    <button onclick="confirmReset()" style="flex:1;background:var(--card);border:1.5px solid rgba(255,75,75,.3);border-radius:14px;padding:12px;font-size:13px;font-weight:800;color:#FF4B4B;cursor:pointer;font-family:'Nunito',sans-serif;">🗑️ Reset</button>
+  </div>
+  <div class="sec">Pilih Bab</div>
+  <div class="bab-list" id="blist"></div>
+</div>
+
+<!-- STATS SCREEN -->
+<div class="scr" id="s-stats">
+  <div class="g-hdr">
+    <button class="g-back" onclick="showScr('s-home');renderHome()">✕</button>
+    <div style="flex:1;font-size:16px;font-weight:900;">📊 Statistik Belajar</div>
+  </div>
+  <div style="flex:1;overflow-y:auto;padding:12px 16px 32px;">
+    <div id="stats-body"></div>
+  </div>
+</div>
+
+<!-- GAME -->
+<div class="scr" id="s-game">
+  <div class="g-hdr">
+    <button class="g-back" onclick="goHome()">✕</button>
+    <div class="g-pw"><div class="g-pf" id="gpf" style="width:0%"></div></div>
+    <div class="g-xp" id="gxp">0 XP</div>
+  </div>
+  <div class="g-body" id="gbody"></div>
+  <div class="g-foot"><button class="abtn green" id="abtn" onclick="handleAct()" disabled>MULAI</button></div>
+</div>
+
+<!-- DONE -->
+<div class="scr" id="s-done">
+  <div class="dtrophy" id="dtrophy">🏆</div>
+  <div class="dtitle" id="dtitle">Luar Biasa!</div>
+  <div class="dsub" id="dsub">Sesi selesai!</div>
+  <div class="dstats">
+    <div class="ds"><div class="dsn" id="dsxp" style="color:var(--yellow)">0</div><div class="dsl">XP</div></div>
+    <div class="ds"><div class="dsn" id="dsacc" style="color:var(--green)">0%</div><div class="dsl">Akurasi</div></div>
+    <div class="ds"><div class="dsn" id="dsok" style="color:var(--blue)">0/0</div><div class="dsl">Benar</div></div>
+  </div>
+  <div class="dbtns">
+    <button class="abtn green" onclick="restartGame()">Ulangi 🔄</button>
+    <button class="abtn blue" onclick="goHome()">Kembali 🏠</button>
+  </div>
+</div>
+
+<script>
+// ==================== DATA ====================
+const BABS=[
+{id:1,name:"Bab 1",desc:"Perkenalan & Salam",col:"#FF4B4B",words:[
+["わたし","Watashi","Saya","user-male"],
+["わたしたち","Watashitachi","Kami","conference"],
+["あなた","Anata","Anda","point-right"],
+["あのひと","Ano hito","Dia","person-male"],
+["みなさん","Minasan","Saudara sekalian","group"],
+["せんせい","Sensei","Guru","teacher"],
+["きょうし","Kyoushi","Pengajar","presentation"],
+["がくせい","Gakusei","Siswa","student-male"],
+["かいしゃいん","Kaishain","Pegawai perusahaan","employee"],
+["ぎんこういん","Ginkouin","Pegawai Bank","bank"],
+["いしゃ","Isha","Dokter","doctor-male"],
+["けんきゅうしゃ","Kenkyuusha","Peneliti","microscope"],
+["エンジニア","Enjinia","Insinyur","engineering"],
+["だいがく","Daigaku","Universitas","university"],
+["びょういん","Byouin","Rumah sakit","hospital"],
+["でんき","Denki","Lampu, listrik","light-on"],
+["だれ","Dare","Siapa","question-mark"],
+["はい","Hai","Iya","checkmark"],
+["いいえ","Iie","Tidak","cancel"],
+["はじめまして","Hajimemashite","Perkenalkan","handshake"],
+["どうぞよろしく","Douzo yoroshiku","Senang bertemu anda","greeting"],
+["アメリカ","Amerika","Amerika","usa-flag"],
+["イギリス","Igirisu","Inggris","uk-flag"],
+["インドネシア","Indonesia","Indonesia","indonesia-flag"],
+["にほん","Nihon","Jepang","japan-flag"],
+["ちゅうごく","Chuugoku","China","china-flag"],
+["ドイツ","Doitsu","Jerman","germany-flag"],
+["フランス","Furansu","Perancis","france-flag"],
+["ブラジル","Burajiru","Brazil","brazil-flag"],
+["かんこく","Kankoku","Korea Selatan","south-korea-flag"],
+]},
+{id:2,name:"Bab 2",desc:"Benda Sehari-hari",col:"#FF9600",words:[
+["これ","Kore","Ini","cursor"],
+["それ","Sore","Itu","left-arrow"],
+["ほん","Hon","Buku","book"],
+["じしょ","Jisho","Kamus","dictionary"],
+["ざっし","Zasshi","Majalah","magazine"],
+["しんぶん","Shinbun","Koran","newspaper"],
+["ノート","No-to","Buku catatan","notebook"],
+["めいし","Meishi","Kartu nama","business-card"],
+["カード","Ka-do","Kartu","credit-card"],
+["テレホンカード","Terehonka-do","Kartu telepon","sim-card"],
+["かぎ","Kagi","Kunci","key"],
+["とけい","Tokei","Jam","watch"],
+["かさ","Kasa","Payung","umbrella"],
+["かばん","Kaban","Tas","bag"],
+["テレビ","Terebi","TV","tv"],
+["ラジオ","Rajio","Radio","radio"],
+["カメラ","Kamera","Kamera","camera"],
+["コンピューター","Konpyu-ta","Komputer","computer"],
+["じどうしゃ","Jidousha","Mobil","car"],
+["つくえ","Tsukue","Meja tulis","desk"],
+["いす","Isu","Kursi","chair"],
+["チョコレート","Chokore-to","Coklat","chocolate-bar"],
+["コーヒー","Ko-hi","Kopi","coffee"],
+["えいご","Eigo","Bahasa Inggris","uk-flag"],
+["にほんご","Nihongo","Bahasa Jepang","japan-flag"],
+]},
+{id:3,name:"Bab 3",desc:"Tempat & Lokasi",col:"#58CC02",words:[
+["ここ","Koko","Sini","location"],
+["そこ","Soko","Sana","direction"],
+["あそこ","Asoko","Sana (jauh)","compass"],
+["どこ","Doko","Mana","map"],
+["きょうしつ","Kyoushitsu","Ruang kelas","classroom"],
+["しょくどう","Shokudo","Kantin","cafeteria"],
+["じむしょ","Jimusho","Kantor","office"],
+["かいぎしつ","Kaigishitsu","Ruang rapat","conference-room"],
+["トイレ","Toire","Toilet","toilet"],
+["エレベーター","Erebe-ta-","Lift","elevator"],
+["エスカレータ","Esukare-ta","Eskalator","escalator"],
+["かいだん","Kaidan","Tangga","stairs"],
+["ロビー","Robi-","Lobi","lobby"],
+["へや","Heya","Kamar","room"],
+["くに","Kuni","Negara","globe"],
+["かいしゃ","Kaisha","Perusahaan","company"],
+["うち","Uchi","Rumah","home"],
+["でんわ","Denwa","Telepon","phone"],
+["くつ","Kutsu","Sepatu","sneaker"],
+["ネクタイ","Nekutai","Dasi","necktie"],
+["ワイン","Wain","Minuman anggur","wine-bottle"],
+["たばこ","Tabako","Rokok","smoking"],
+["いくら","Ikura","Berapa","price-tag"],
+["すみません","Sumimasen","Maaf / Permisi","sorry"],
+["イタリア","Itaria","Italia","italy-flag"],
+]},
+{id:4,name:"Bab 4",desc:"Aktivitas & Waktu",col:"#1CB0F6",words:[
+["おきます","Okimasu","Bangun","sunrise"],
+["ねます","Nemasu","Tidur","sleep"],
+["はたらきます","Hatarakimasu","Bekerja","briefcase"],
+["やすみます","Yasumimasu","Beristirahat","rest"],
+["べんきょうします","Benkyoushimasu","Belajar","study"],
+["おわります","Owarimasu","Selesai","finish-flag"],
+["ぎんこう","Ginkou","Bank","bank"],
+["ゆうびんきょく","Yuubinkyoku","Kantor pos","post-office"],
+["としょかん","Toshokan","Perpustakaan","library"],
+["いま","Ima","Sekarang","clock"],
+["あさ","Asa","Pagi","sunrise"],
+["ひる","Hiru","Siang","sun"],
+["ばん","Ban","Malam","moon-symbol"],
+["おととい","Ototoi","2 hari yang lalu","calendar"],
+["きのう","Kinou","Kemarin","yesterday"],
+["きょう","Kyou","Hari ini","today"],
+["あした","Ashita","Besok","tomorrow"],
+["あさって","Asatte","Lusa","schedule"],
+["まいにち","Mai nichi","Tiap hari","daily-calendar"],
+["げつようび","Getsuyoubi","Senin","monday"],
+["かようび","Kayoubi","Selasa","tuesday"],
+["すいようび","Suiyoubi","Rabu","wednesday"],
+["もくようび","Mokuyoubi","Kamis","thursday"],
+["きんようび","Kinyoubi","Jumat","friday"],
+["どようび","Doyoubi","Sabtu","saturday"],
+["にちようび","Nichiyoubi","Minggu","sunday"],
+]},
+{id:5,name:"Bab 5",desc:"Transportasi",col:"#CE82FF",words:[
+["いきます","Ikimasu","Pergi","walking"],
+["きます","Kimasu","Datang","arrival"],
+["かえります","Kaerimasu","Pulang","home"],
+["がっこう","Gakkou","Sekolah","school"],
+["スーパー","Su-pa","Supermarket","supermarket"],
+["えき","Eki","Stasiun","train-station"],
+["ひこうき","Hikouki","Pesawat","airplane"],
+["ふね","Fune","Kapal","ship"],
+["でんしゃ","Densha","Kereta api","train"],
+["しんかんせん","Shinkansen","Shinkansen","high-speed-train"],
+["バス","Basu","Bus","bus"],
+["タクシー","Takushi-","Taksi","taxi"],
+["じてんしゃ","Jitensha","Sepeda","bicycle"],
+["ともだち","Tomodachi","Teman","friends"],
+["かれ","Kare","Dia (laki-laki)","man"],
+["かのじょ","Kanojo","Dia (perempuan)","woman"],
+["かぞく","Kazoku","Keluarga","family"],
+["せんしゅう","Senshuu","Minggu lalu","last-week"],
+["こんしゅう","Konshuu","Minggu ini","this-week"],
+["らいしゅう","Raishuu","Minggu depan","next-week"],
+["きょねん","Kyonen","Tahun lalu","past"],
+["ことし","Kotoshi","Tahun ini","present"],
+["らいねん","Rainen","Tahun depan","future"],
+["いつ","Itsu","Kapan","question-mark"],
+["たんじょうび","Tanjoubi","Ulang tahun","birthday-cake"],
+]},
+{id:6,name:"Bab 6",desc:"Makanan & Minuman",col:"#FF4B4B",words:[
+["たべます","Tabemasu","Makan","eating"],
+["のみます","Nomimasu","Minum","drinking"],
+["ごはん","Gohan","Nasi","rice-bowl"],
+["あさごはん","Asa gohan","Makan pagi","breakfast"],
+["ひるごはん","Hiru gohan","Makan siang","lunch"],
+["ばんごはん","Ban gohan","Makan malam","dinner"],
+["パン","Pan","Roti","bread"],
+["たまご","Tamago","Telur","egg"],
+["にく","Niku","Daging","steak"],
+["さかな","Sakana","Ikan","fish"],
+["やさい","Yasai","Sayur","salad"],
+["くだもの","Kudamono","Buah-buahan","fruits"],
+["みず","Mizu","Air","water-bottle"],
+["おちゃ","Ocha","Teh Jepang","green-tea"],
+["こうちゃ","Koucha","Teh","tea"],
+["ぎゅうにゅう","Gyuunyuu","Susu","milk"],
+["ジュース","Ju-su","Jus","juice"],
+["ビール","Bi-ru","Bir","beer"],
+["さけ","Sake","Sake","sake"],
+["えいが","Eiga","Film","movie"],
+["てがみ","Tegami","Surat","envelope"],
+["しゃしん","Shashin","Foto","camera"],
+["テニス","Tenisu","Tenis","tennis"],
+["サッカー","Sakka-","Sepak bola","soccer-ball"],
+["はなみ","Hanami","Menikmati bunga sakura","cherry-blossom"],
+]},
+{id:7,name:"Bab 7",desc:"Memberi & Alat",col:"#FF9600",words:[
+["きります","Kirimasu","Memotong","cut"],
+["おくります","Okurimasu","Mengirim","send"],
+["あげます","Agemasu","Memberikan","gift"],
+["もらいます","Moraimasu","Menerima","receive"],
+["かします","Kashimasu","Meminjamkan","lend"],
+["かります","Karimasu","Meminjam","borrow"],
+["おしえます","Oshiemasu","Mengajar","teaching"],
+["はし","Hashi","Sumpit","chopsticks"],
+["スプーン","Supuun","Sendok","spoon"],
+["ナイフ","Naifu","Pisau","kitchen-knife"],
+["フォーク","Fo-ku","Garpu","fork"],
+["はさみ","Hasami","Gunting","scissors"],
+["ファクス","Fakusu","Fax","fax"],
+["パソコン","Pasokon","Komputer pribadi","laptop"],
+["ホッチキス","Hochikisu","Stapler","stapler"],
+["セロテープ","Serote-pu","Selotip","tape-dispenser"],
+["けしゴム","Keshigomu","Penghapus","eraser"],
+["かみ","Kami","Kertas","paper"],
+["はな","Hana","Bunga","flower"],
+["シャツ","Shatsu","Kemeja","shirt"],
+["プレゼント","Purezento","Hadiah","gift-box"],
+["にもつ","Nimotsu","Barang","luggage"],
+["おかね","Okane","Uang","money-bag"],
+["きっぷ","Kippu","Tiket","ticket"],
+["おみやげ","Omiyage","Oleh-oleh","souvenir"],
+]},
+{id:8,name:"Bab 8",desc:"Kata Sifat",col:"#58CC02",words:[
+["おおきい","Ookii","Besar","big"],
+["ちいさい","Chiisai","Kecil","small"],
+["あたらしい","Atarashii","Baru","new"],
+["ふるい","Furui","Lama / Tua","old"],
+["いい","Ii","Bagus","thumbs-up"],
+["わるい","Warui","Jelek","thumbs-down"],
+["あつい","Atsui","Panas","fire"],
+["さむい","Samui","Dingin","cold-face"],
+["つめたい","Tsumetai","Dingin (benda)","ice-cube"],
+["むずかしい","Muzukashii","Susah","brain"],
+["やさしい","Yasashii","Baik hati","heart"],
+["たかい","Takai","Mahal / Tinggi","price-tag"],
+["やすい","Yasui","Murah","discount"],
+["おもしろい","Omoshiroi","Menarik","star"],
+["おいしい","Oishii","Enak","yum"],
+["いそがしい","Isogashii","Sibuk","clock"],
+["たのしい","Tanoshii","Menyenangkan","party-popper"],
+["しろい","Shiroi","Putih","white-circle"],
+["くろい","Kuroi","Hitam","black-circle"],
+["あかい","Akai","Merah","red-circle"],
+["あおい","Aoi","Biru","blue-circle"],
+["きれい（な）","Kirei (na)","Cantik / Bersih","sparkles"],
+["しずか（な）","Shizuka (na)","Tenang","meditation"],
+["にぎやか（な）","Nigiyaka (na)","Ramai","celebration"],
+["べんり（な）","Benri (na)","Praktis","settings"],
+["とても","Totemo","Sangat","100"],
+]},
+{id:9,name:"Bab 9",desc:"Suka & Kemampuan",col:"#1CB0F6",words:[
+["わかります","Wakarimasu","Mengerti","lightbulb"],
+["あります","Arimasu","Ada (benda mati)","box"],
+["すき（な）","Suki (na)","Suka","heart"],
+["きらい（な）","Kirai (na)","Benci","broken-heart"],
+["じょうず（な）","Jouzu (na)","Pintar","award"],
+["へた（な）","Heta (na)","Tidak pandai","confused"],
+["りょうり","Ryouri","Masakan","cooking"],
+["のみもの","Nomimono","Minuman","drinks"],
+["スポーツ","Supootsu","Olahraga","sports"],
+["やきゅう","Yakyuu","Baseball","baseball"],
+["ダンス","Dansu","Tari","dancer"],
+["おんがく","Ongaku","Musik","music"],
+["うた","Uta","Lagu","musical-note"],
+["コンサート","Konsa-to","Konser","concert"],
+["カラオケ","Karaoke","Karaoke","microphone"],
+["かぶき","Kabuki","Kabuki","theater"],
+["かんじ","Kanji","Kanji","japanese"],
+["ひらがな","Hiragana","Hiragana","hiragana"],
+["じかん","Jikan","Waktu","clock"],
+["やくそく","Yakusoku","Janji","handshake"],
+["よく","Yoku","Sering","refresh"],
+["たくさん","Takusan","Banyak","plus"],
+["すこし","Sukoshi","Sedikit","minus"],
+["ぜんぜん","Zenzen","Tidak sama sekali","cancel"],
+["どうして","Doushite","Kenapa","question"],
+]},
+{id:10,name:"Bab 10",desc:"Ada & Posisi",col:"#CE82FF",words:[
+["います","Imasu","Ada (benda hidup)","person-male"],
+["いろいろ（な）","Iroiro (na)","Bermacam-macam","variety"],
+["いぬ","Inu","Anjing","dog"],
+["ねこ","Neko","Kucing","cat"],
+["き","Ki","Pohon","tree"],
+["れいぞうこ","Reizouko","Kulkas","refrigerator"],
+["テーブル","Te-buru","Meja makan","table"],
+["ベッド","Beddo","Tempat tidur","bed"],
+["たな","Tana","Lemari","shelf"],
+["ドア","Doa","Pintu","door"],
+["まど","Mado","Jendela","window"],
+["こうえん","Kouen","Taman","park"],
+["きっさてん","Kissaten","Kedai kopi","cafe"],
+["ほんや","Hon-ya","Toko buku","bookshop"],
+["のりば","Noriba","Tempat naik kendaraan","bus-stop"],
+["うえ","Ue","Atas","up-arrow"],
+["した","Shita","Bawah","down-arrow"],
+["まえ","Mae","Depan","forward"],
+["うしろ","Ushiro","Belakang","back"],
+["みぎ","Migi","Kanan","right"],
+["ひだり","Hidari","Kiri","left"],
+["なか","Naka","Tengah","center"],
+["そと","Soto","Luar","outside"],
+["となり","Tonari","Samping","beside"],
+["ちかく","Chikaku","Dekat","nearby"],
+["いちばん","Ichiban","Paling","number-1"],
+]},
+{id:11,name:"Bab 11",desc:"Keluarga & Bilangan",col:"#FF4B4B",words:[
+["りょうしん","Ryoushin","Orang tua","parents"],
+["きょうだい","Kyoudai","Saudara","siblings"],
+["ちち","Chichi","Ayah (sendiri)","father"],
+["はは","Haha","Ibu (sendiri)","mother"],
+["おとうさん","Otousan","Ayah (orang lain)","father"],
+["おかあさん","Okaasan","Ibu (orang lain)","mother"],
+["あに","Ani","Kakak laki-laki","brother"],
+["あね","Ane","Kakak perempuan","sister"],
+["おとうと","Otouto","Adik laki-laki","brother"],
+["いもうと","Imouto","Adik perempuan","sister"],
+["りんご","Ringo","Apel","apple"],
+["みかん","Mikan","Jeruk","orange"],
+["サンドイッチ","Sandoicchi","Sandwich","sandwich"],
+["カレーライス","Kare-raisu","Nasi kare","curry"],
+["アイスクリーム","Aisu Kuri-mu","Es krim","ice-cream"],
+["きって","Kitte","Perangko","stamp"],
+["はがき","Hagaki","Kartu pos","postcard"],
+["ふうとう","Fuutou","Amplop","envelope"],
+["ひとつ","Hitotsu","Satu buah","one"],
+["ふたつ","Futatsu","Dua buah","two"],
+["みっつ","Mittsu","Tiga buah","three"],
+["よっつ","Yottsu","Empat buah","four"],
+["いつつ","Itsutsu","Lima buah","five"],
+["ひとり","Hitori","Satu orang","person-male"],
+["ふたり","Futari","Dua orang","group"],
+]},
+{id:12,name:"Bab 12",desc:"Cuaca & Musim",col:"#FF9600",words:[
+["きせつ","Kisetsu","Musim","season"],
+["はる","Haru","Musim semi","spring"],
+["なつ","Natsu","Musim panas","summer"],
+["あき","Aki","Musim gugur","autumn"],
+["ふゆ","Fuyu","Musim dingin","winter"],
+["てんき","Tenki","Cuaca","weather"],
+["あめ","Ame","Hujan","rain"],
+["ゆき","Yuki","Salju","snow"],
+["くもり","Kumori","Berawan","cloud"],
+["あたたかい","Atatakai","Hangat","warm"],
+["すずしい","Suzushii","Sejuk","cool"],
+["あまい","Amai","Manis","candy"],
+["からい","Karai","Pedas","chili-pepper"],
+["おもい","Omoi","Berat","weight"],
+["かるい","Karui","Ringan","feather"],
+["はやい","Hayai","Cepat","running"],
+["おそい","Osoi","Lambat","turtle"],
+["ホテル","Hoteru","Hotel","hotel"],
+["くうこう","Kuukou","Bandara","airplane"],
+["うみ","Umi","Laut","sea"],
+["パーティー","Pa-ti-","Pesta","party-popper"],
+["まつり","Matsuri","Festival","festival"],
+["しけん","Shiken","Ujian","exam"],
+["すきやき","Sukiyaki","Sukiyaki","hot-pot"],
+["すし","Sushi","Sushi","sushi"],
+]},
+{id:13,name:"Bab 13",desc:"Kegiatan & Hobi",col:"#58CC02",words:[
+["あそびます","Asobimasu","Bermain","playground"],
+["およぎます","Oyogimasu","Berenang","swimmer"],
+["むかえます","Mukaemasu","Menjemput","arrival"],
+["つかれます","Tsukaremasu","Lelah","tired"],
+["けっこんします","Kekkon shimasu","Menikah","wedding"],
+["かいものします","Kaimono shimasu","Berbelanja","shopping-bag"],
+["しょくじします","Shokuji shimasu","Makan (di restoran)","restaurant"],
+["さんぽします","Sanpo shimasu","Jalan-jalan","walking"],
+["ほしい","Hoshii","Ingin (benda)","wishlist"],
+["さびしい","Sabishii","Kesepian","lonely"],
+["ひろい","Hiroi","Luas","wide"],
+["せまい","Semai","Sempit","narrow"],
+["プール","Pu-ru","Kolam renang","swimming-pool"],
+["かわ","Kawa","Sungai","river"],
+["つり","Tsuri","Memancing","fishing"],
+["スキー","Suki-","Ski","skiing"],
+["ゴルフ","Gorufu","Golf","golf"],
+["かいぎ","Kaigi","Rapat","meeting"],
+["しゅうまつ","Shuumatsu","Akhir minggu","weekend"],
+["ただいま","Tadaima","Saya sudah pulang","home"],
+["おかえりなさい","Okaerinasai","Selamat datang kembali","welcome"],
+["すごい","Sugoi","Luar biasa","star"],
+["ホンコン","Honkon","Hongkong","hong-kong"],
+["シンガポール","Shingapo-ru","Singapura","singapore"],
+]},
+{id:14,name:"Bab 14",desc:"Petunjuk & Arahan",col:"#1CB0F6",words:[
+["つけます","Tsukemasu","Menyalakan","power-button"],
+["けします","Keshimasu","Mematikan","switch-off"],
+["あけます","Akemasu","Membuka","open-door"],
+["しめます","Shimemasu","Menutup","closed-door"],
+["まちます","Machimasu","Menunggu","waiting"],
+["とめます","Tomemasu","Memberhentikan","stop-sign"],
+["まがります","Magarimasu","Berbelok","turn"],
+["もちます","Mochimasu","Memegang","hand"],
+["てつだいます","Tetsudaimasu","Membantu","help"],
+["みせます","Misemasu","Memperlihatkan","show"],
+["はじめます","Hajimemasu","Memulai","play-button"],
+["エアコン","Eakon","AC","air-conditioner"],
+["パスポート","Pasupo-to","Paspor","passport"],
+["なまえ","Namae","Nama","name-tag"],
+["じゅうしょ","Juusho","Alamat","address"],
+["ちず","Chizu","Peta","map"],
+["しお","Shio","Garam","salt"],
+["さとう","Satou","Gula","sugar"],
+["ゆっくり","Yukkuri","Pelan-pelan","slow"],
+["すぐ","Sugu","Segera","fast-forward"],
+["しんごう","Shingou","Lampu lalu lintas","traffic-light"],
+["まっすぐ","Massugu","Terus / Lurus","straight"],
+["おつり","Otsuri","Uang kembalian","coin"],
+]},
+{id:15,name:"Bab 15",desc:"Mengetahui & Tinggal",col:"#CE82FF",words:[
+["しっています","Shitte imasu","Mengetahui","knowledge"],
+["すんでいます","Sunde imasu","Tinggal di","house"],
+["しりょう","Shiryou","Data / Bahan","document"],
+["カタログ","Kataro-gu","Katalog","catalog"],
+["じこくひょう","Jikokuhyou","Jadwal","timetable"],
+["ふく","Fuku","Baju","clothes"],
+["ソフト","Sofuto","Software","software"],
+["せんもん","Senmon","Jurusan","major"],
+["はいしゃ","Haisha","Dokter gigi","dentist"],
+["とこや","Tokoya","Tukang pangkas","barber"],
+["どくしん","Dokushin","Single / Jomlo","single"],
+["たちます","Tachimasu","Berdiri","standing"],
+["すわります","Suwarimasu","Duduk","sitting"],
+["つかいます","Tsukaimasu","Memakai","use"],
+["つくります","Tsukurimasu","Membuat","create"],
+["うります","Urimasu","Menjual","selling"],
+["わかい","Wakai","Muda","young"],
+["ながい","Nagai","Panjang","long"],
+["みじかい","Mijikai","Pendek","short"],
+["あかるい","Akarui","Terang","bright"],
+["くらい","Kurai","Gelap","dark"],
+]},
+{id:16,name:"Bab 16",desc:"Naik Kendaraan & Tubuh",col:"#FF4B4B",words:[
+["のります","Norimasu","Naik kendaraan","boarding"],
+["おります","Orimasu","Turun kendaraan","exit"],
+["のりかえます","Norikaemasu","Ganti kendaraan","transfer"],
+["あびます","Abimasu","Mandi","shower"],
+["いれます","Iremasu","Memasukkan","insert"],
+["だします","Dashimasu","Mengeluarkan","export"],
+["はいります","Hairimasu","Masuk","enter"],
+["でます","Demasu","Keluar","exit"],
+["やめます","Yamemasu","Berhenti","stop"],
+["おします","Oshimasu","Menekan","push-button"],
+["からだ","Karada","Badan","body"],
+["あたま","Atama","Kepala","head"],
+["かみ","Kami","Rambut","hair"],
+["かお","Kao","Wajah","face"],
+["め","Me","Mata","eye"],
+["みみ","Mimi","Telinga","ear"],
+["くち","Kuchi","Mulut","mouth"],
+["は","Ha","Gigi","tooth"],
+["おなか","Onaka","Perut","stomach"],
+["あし","Ashi","Kaki","foot"],
+["キャッシュカード","Kyasshu ka-do","Kartu ATM","atm-card"],
+["あんしょうばんごう","Anshou bangou","PIN","password"],
+["ボタン","Botan","Tombol","button"],
+]},
+{id:17,name:"Bab 17",desc:"Ingat & Lupa",col:"#FF9600",words:[
+["おぼえます","Oboemasu","Menghafal","memory"],
+["わすれます","Wasuremasu","Lupa","forget"],
+["なくします","Nakushimasu","Kehilangan","lost"],
+["はらいます","Haraimasu","Membayar","payment"],
+["かえします","Kaeshimasu","Mengembalikan","return"],
+["でかけます","Dekakemasu","Pergi keluar","go-out"],
+["ぬぎます","Nugimasu","Menanggalkan","clothes"],
+["もっていきます","Motte ikimasu","Membawa pergi","carry"],
+["もってきます","Motte kimasu","Membawa datang","bring"],
+["しんぱいします","Shinpai shimasu","Khawatir","worry"],
+["ざんぎょうします","Zangyou shimasu","Lembur","overtime"],
+["たいせつ（な）","Taisetsu (na)","Berharga","important"],
+["だいじょうぶ（な）","Daijoubu (na)","Tidak apa-apa","ok"],
+["あぶない","Abunai","Bahaya","danger"],
+["もんだい","Mondai","Masalah","problem"],
+["かぜ","Kaze","Angin / Masuk angin","wind"],
+["ねつ","Netsu","Demam","fever"],
+["びょうき","Byouki","Sakit","sick"],
+["おふろ","Ofuro","Bak mandi","bathtub"],
+["のど","Nodo","Tenggorokan","throat"],
+["どうしましたか","Dou shimashita ka","Ada apa?","question"],
+["おだいじに","Odaiji ni","Semoga lekas sembuh","get-well"],
+]},
+{id:18,name:"Bab 18",desc:"Kemampuan & Hobi",col:"#58CC02",words:[
+["できます","Dekimasu","Bisa / Mampu","ability"],
+["あらいます","Araimasu","Mencuci","washing"],
+["ひきます","Hikimasu","Bermain (alat musik)","piano"],
+["うたいます","Utaimasu","Bernyanyi","singing"],
+["あつめます","Atsumemasu","Mengumpulkan","collection"],
+["すてます","Sutemasu","Membuang","trash"],
+["かえます","Kaemasu","Menukar","exchange"],
+["うんてんします","Unten shimasu","Mengemudi","driving"],
+["しゅみ","Shumi","Hobi","hobby"],
+["にっき","Nikki","Catatan harian","diary"],
+["かちょう","Kachou","Kepala bagian","manager"],
+["しゃちょう","Shachou","Kepala perusahaan","ceo"],
+["どうぶつ","Doubutsu","Binatang","paw"],
+["うま","Uma","Kuda","horse"],
+["ゴルフ","Gorufu","Golf","golf"],
+["すもう","Sumou","Sumo","sumo"],
+["おちゃ","Ocha","Upacara minum teh","tea"],
+["かんぱい","Kanpai","Tos","cheers"],
+["ダイエット","Daietto","Diet","diet"],
+["からだにいい","Karada ni ii","Baik untuk tubuh","healthy"],
+["ケーキ","Ke-ki","Kue Eropa","cake"],
+["ぜひ","Zehi","Pasti / Mesti","check"],
+]},
+{id:19,name:"Bab 19",desc:"Bisa & Kondisi",col:"#1CB0F6",words:[
+["のぼります","Noborimasu","Mendaki","mountain"],
+["とまります","Tomarimasu","Menginap","hotel"],
+["そうじします","Souji shimasu","Membersihkan","cleaning"],
+["せんたくします","Sentaku shimasu","Mencuci pakaian","laundry"],
+["れんしゅうします","Renshuu shimasu","Berlatih","practice"],
+["なります","Narimasu","Menjadi","change"],
+["ねむい","Nemui","Mengantuk","sleepy"],
+["つよい","Tsuyoi","Kuat","strong"],
+["よわい","Yowai","Lemah","weak"],
+["ちょうし","Choushi","Kondisi","condition"],
+["パチンコ","Pachinko","Pachinko","game-controller"],
+["ひ","Hi","Hari","calendar"],
+["いちど","Ichido","Satu kali","one"],
+["だんだん","Dandan","Berangsur-angsur","progress"],
+["もうすぐ","Mou sugu","Tidak lama lagi","time"],
+["おかげさまで","Okage sama de","Berkat bantuan anda","thank-you"],
+["むり（な）","Muri (na)","Berlebihan","impossible"],
+["しかし","Shikashi","Tetapi","but"],
+["じつは","Jitsu wa","Sebetulnya","info"],
+]},
+{id:20,name:"Bab 20",desc:"Perbaikan & Dialog",col:"#CE82FF",words:[
+["いります","Irimasu","Memerlukan","need"],
+["しらべます","Shirabemasu","Memeriksa","search"],
+["なおします","Naoshimasu","Memperbaiki","repair"],
+["でんわします","Denwa shimasu","Menelepon","phone-call"],
+["ぼく","Boku","Aku (pria)","boy"],
+["きみ","Kimi","Kamu (informal)","you"],
+["うん","Un","Iya (informal)","yes"],
+["ううん","Uun","Tidak (informal)","no"],
+["サラリーマン","Sarari-man","Karyawan","office-worker"],
+["ことば","Kotoba","Kata / Bahasa","speech-bubble"],
+["ぶっか","Bukka","Harga barang","price-tag"],
+["きもの","Kimono","Kimono","kimono"],
+["ビザ","Biza","Visa","visa"],
+["はじめ","Hajime","Awal","start"],
+["おわり","Owari","Akhir","end"],
+["さいきん","Saikin","Akhir-akhir ini","recent"],
+["たぶん","Tabun","Barangkali","maybe"],
+["きっと","Kitto","Pasti","certainty"],
+["ほんとうに","Hontouni","Betul-betul","truth"],
+["もちろん","Mochiron","Tentu saja","of-course"],
+["カンガルー","Kangaru-","Kangguru","kangaroo"],
+]},
+{id:21,name:"Bab 21",desc:"Pendapat & Opini",col:"#FF4B4B",words:[
+["おもいます","Omoimasu","Berpikir","think"],
+["いいます","Iimasu","Berkata","speech-bubble"],
+["たります","Tarimasu","Cukup","enough"],
+["かちます","Kachimasu","Menang","trophy"],
+["まけます","Makemasu","Kalah","loser"],
+["やくにたちます","Yaku ni tachimasu","Berguna","useful"],
+["むだ（な）","Muda (na)","Sia-sia","waste"],
+["ふべん（な）","Fuben (na)","Tidak praktis","inconvenient"],
+["おなじ","Onaji","Sama","equal"],
+["すごい","Sugoi","Hebat","amazing"],
+["だいとうりょう","Daitouryou","Presiden","president"],
+["せいじ","Seiji","Politik","politics"],
+["ニュース","Nyu-su","Berita","news"],
+["スピーチ","Supi-chi","Pidato","speech"],
+["しあい","Shiai","Pertandingan","competition"],
+["アルバイト","Arbaito","Kerja sambilan","part-time"],
+["いけん","Iken","Pendapat","opinion"],
+["ユーモア","Yu-moa","Humor","laugh"],
+["デザイン","Dezain","Desain","design"],
+["こうつう","Koutsuu","Lalu lintas","traffic"],
+["ラッシュ","Rasshu","Jam sibuk","rush"],
+]},
+{id:22,name:"Bab 22",desc:"Pakaian & Rumah",col:"#FF9600",words:[
+["きます","Kimasu","Memakai baju","shirt"],
+["はきます","Hakimasu","Memakai celana/sepatu","pants"],
+["かぶります","Kaburimasu","Memakai topi","hat"],
+["かけます","Kakemasu","Memakai kacamata","glasses"],
+["うまれます","Umaremasu","Lahir","baby"],
+["コート","Ko-to","Mantel / Jas","coat"],
+["スーツ","Su-tsu","Setelan pakaian","suit"],
+["セーター","Se-ta-","Sweater","sweater"],
+["ぼうし","Boushi","Topi","hat"],
+["めがね","Megane","Kacamata","glasses"],
+["やちん","Yachin","Sewa rumah","rent"],
+["わしつ","Washitsu","Kamar ala Jepang","tatami"],
+["ふとん","Futon","Selimut ala Jepang","futon"],
+["アパート","Apa-to","Apartemen","apartment"],
+["パリ","Pari","Paris","paris"],
+["ばんりのちょうじょう","Banri no choujou","Tembok China","great-wall"],
+]},
+{id:23,name:"Bab 23",desc:"Petunjuk Arah",col:"#58CC02",words:[
+["まわします","Mawashimasu","Memutar","rotate"],
+["ひきます","Hikimasu","Menarik","pull"],
+["かえます","Kaemasu","Mengubah","change"],
+["たたきます","Tatakimasu","Mengetuk","knock"],
+["でます","Demasu","Keluar","exit"],
+["うごきます","Ugokimasu","Bergerak","walking"],
+["あるきます","Arukimasu","Berjalan kaki","footsteps"],
+["わたります","Watarimasu","Menyeberang","crossing"],
+["きをつけます","Ki wo tsukemasu","Berhati-hati","caution"],
+["ひっこしします","Hikkoshi shimasu","Pindah rumah","moving-box"],
+["でんきや","Denkiya","Tukang listrik","electrician"],
+["サイズ","Saizu","Ukuran","ruler"],
+["おと","Oto","Bunyi / Suara","sound"],
+["きかい","Kikai","Mesin","machine"],
+["こしょう","Koshou","Kerusakan","broken"],
+["みち","Michi","Jalan","road"],
+["こうさてん","Kousaten","Persimpangan","intersection"],
+["かど","Kado","Sudut (jalan)","corner"],
+["はし","Hashi","Jembatan","bridge"],
+["ちゅうしゃじょう","Chuushajou","Tempat parkir","parking"],
+["たてもの","Tatemono","Gedung","building"],
+["しょうがつ","Shougatsu","Tahun baru","new-year"],
+]},
+{id:24,name:"Bab 24",desc:"Memberi & Mengajak",col:"#1CB0F6",words:[
+["くれます","Kuremasu","Memberi (kepada saya)","gift"],
+["つれていきます","Tsurete ikimasu","Mengajak pergi","walking-together"],
+["つれてきます","Tsurete kimasu","Mengajak datang","come-together"],
+["おくります","Okurimasu","Mengirim","send"],
+["しょうかいします","Shoukai shimasu","Memperkenalkan","introduce"],
+["あんないします","Annai shimasu","Memandu","guide"],
+["せつめいします","Setsumei shimasu","Menjelaskan","explain"],
+["じゅんび","Junbi","Persiapan","preparation"],
+["いみ","Imi","Arti","meaning"],
+["おかし","Okashi","Kue / Makanan kecil","candy"],
+["ぜんぶ","Zenbu","Semua","all"],
+["じぶんで","Jibun de","Diri sendiri","self"],
+["ほかに","Hoka ni","Yang lain","others"],
+]},
+{id:25,name:"Bab 25",desc:"Harapan & Masa Depan",col:"#CE82FF",words:[
+["かんがえます","Kangaemasu","Memikirkan","thinking"],
+["つきます","Tsukimasu","Tiba / Sampai","arrival"],
+["りゅうがくします","Ryuugaku shimasu","Belajar di luar negeri","study-abroad"],
+["としをとります","Toshi wo torimasu","Menjadi tua","aging"],
+["がんばります","Ganbarimasu","Berusaha keras","effort"],
+["いなか","Inaka","Kampung halaman","village"],
+["たいしかん","Taishikan","Kedutaan besar","embassy"],
+["グループ","Goru-pu","Grup","group"],
+["チャンス","Chansu","Kesempatan","chance"],
+["てんきん","Tenkin","Pindah kerja","transfer"],
+["もし","Moshi","Jika / Kalau","if"],
+]},
+{id:26,name:"Bab 26",desc:"Jadwal & Rencana",col:"#FF4B4B",words:[
+["みます","Mimasu","Memeriksa","check"],
+["さがします","Sagashimasu","Mencari","search"],
+["おくれます","Okuremasu","Terlambat","late"],
+["まにあいます","Ma ni aimasu","Tepat waktu","on-time"],
+["やります","Yarimasu","Melakukan","do"],
+["さんかします","Sanka shimasu","Ikut serta","participate"],
+["もうしこみます","Moushikomimasu","Mendaftar","apply"],
+["つごうがいい","Tsugou ga ii","Tidak ada halangan","available"],
+["つごうがわるい","Tsugou ga warui","Ada halangan","busy"],
+["じゅうどう","Juudou","Judo","judo"],
+["うんどうかい","Undoukai","Pesta olahraga","sports"],
+["ばしょ","Basho","Tempat","location"],
+["ボランティア","Borantia","Sukarelawan","volunteer"],
+["こんど","Kondo","Lain kali","next-time"],
+["ちょくせつ","Chokusetsu","Langsung","direct"],
+["いつでも","Itsudemo","Kapanpun","anytime"],
+["どこでも","Dokodemo","Dimanapun","anywhere"],
+["だれでも","Daredemo","Siapapun","everyone"],
+]},
+{id:27,name:"Bab 27",desc:"Teknologi & Fasilitas",col:"#FF9600",words:[
+["かいます","Kaimasu","Memelihara","care"],
+["たてます","Tatemasu","Membangun","build"],
+["はしります","Hashirimasu","Berlari","running"],
+["みえます","Miemasu","Terlihat","visible"],
+["きこえます","Kikoemasu","Terdengar","hearing"],
+["できます","Dekimasu","Rampung / Selesai","done"],
+["ひらきます","Hirakimasu","Membuka (kursus)","open"],
+["ペット","Petto","Binatang peliharaan","pet"],
+["とり","Tori","Burung","bird"],
+["こえ","Koe","Suara","voice"],
+["なみ","Nami","Ombak","wave"],
+["はなび","Hanabi","Kembang api","fireworks"],
+["けしき","Keshiki","Pemandangan","landscape"],
+["どうぐ","Dougo","Perkakas / Alat","tools"],
+["じどうはんばいき","Jidou hanbaiki","Mesin penjual otomatis","vending-machine"],
+["クリーニング","Kuri-ningu","Laundri","laundry"],
+["マンション","Manshon","Apartemen mewah","apartment"],
+["だいどころ","Daidokoro","Dapur","kitchen"],
+["はっきり","Hakkiri","Dengan jelas","clear"],
+["ゆめ","Yume","Mimpi","dream"],
+["すばらしい","Subarashii","Hebat / Sangat menarik","wonderful"],
+["ロボット","Robotto","Robot","robot"],
+["うちゅう","Uchuu","Luar angkasa","rocket"],
+["こわい","Kowai","Takut","scared"],
+]},
+{id:28,name:"Bab 28",desc:"Karakter & Kebiasaan",col:"#58CC02",words:[
+["うれます","Uremasu","Terjual","sold"],
+["おどります","Odorimasu","Menari","dancer"],
+["えらびます","Erabimasu","Memilih","choice"],
+["ちがいます","Chigaimasu","Berbeda","different"],
+["かよいます","Kayoimasu","Pulang pergi","commute"],
+["メモします","Memo shimasu","Membuat catatan","notepad"],
+["まじめ（な）","Majime (na)","Rajin / Sungguh-sungguh","hard-working"],
+["ねっしん（な）","Nesshin (na)","Tekun","enthusiastic"],
+["えらい","Erai","Hebat","great"],
+["しゅうかん","Shuukan","Kebiasaan","habit"],
+["けいけん","Keiken","Pengalaman","experience"],
+["にんき","Ninki","Populer","popular"],
+["いろ","Iro","Warna","color-palette"],
+["あじ","Aji","Rasa","taste"],
+["ねだん","Nedan","Harga","price-tag"],
+["きゅうりょう","Kyuuryou","Gaji","salary"],
+["ボーナス","Bo-nasu","Bonus","bonus"],
+["ばんぐみ","Bangumi","Acara / Program","tv-show"],
+["ドラマ","Dorama","Drama","drama"],
+["しょうせつ","Shousetsu","Novel","novel"],
+["かしゅ","Kashu","Penyanyi","singer"],
+["むすこ","Musuko","Putra (sendiri)","son"],
+["むすめ","Musume","Putri (sendiri)","daughter"],
+["しょうらい","Shouurai","Masa depan","future"],
+]},
+{id:29,name:"Bab 29",desc:"Kerusakan & Keadaan",col:"#1CB0F6",words:[
+["あきます","Akimasu","Terbuka","open"],
+["しまります","Shimarimasu","Tertutup","closed"],
+["つきます","Tsukimasu","Menyala","on"],
+["きえます","Kiemasu","Mati / Padam","off"],
+["こみます","Komimasu","Ramai / Macet","crowd"],
+["すきます","Sukimasu","Sepi","empty"],
+["こわれます","Kowaremasu","Rusak","broken"],
+["われます","Waremasu","Pecah","broken-glass"],
+["おれます","Oremasu","Patah","broken"],
+["やぶれます","Yaburemasu","Sobek","torn"],
+["よごれます","Yogoremasu","Kotor","dirty"],
+["とまります","Tomarimasu","Berhenti","stop"],
+["おとします","Otoshimasu","Menjatuhkan","drop"],
+["さら","Sara","Piring","plate"],
+["おちゃわん","Ochawan","Mangkuk","bowl"],
+["コップ","Koppu","Gelas","glass"],
+["ガラス","Garasu","Kaca","glass-material"],
+["ふくろ","Fukuro","Kantong plastik","bag"],
+["さいふ","Saifu","Dompet","wallet"],
+["よかった","Yokatta","Syukurlah","relief"],
+["じしん","Jishin","Gempa bumi","earthquake"],
+["かべ","Kabe","Dinding","wall"],
+["にし","Nishi","Barat","west"],
+]},
+{id:30,name:"Bab 30",desc:"Dekorasi & Tata Letak",col:"#CE82FF",words:[
+["はります","Harimasu","Menempelkan","paste"],
+["かけます","Kakemasu","Menggantungkan","hang"],
+["ならべます","Narabemasu","Menjajarkan","arrange"],
+["うえます","Uemasu","Menanam","plant"],
+["もどします","Modoshimasu","Mengembalikan","return"],
+["まとめます","Matomemasu","Menyusun","organize"],
+["かたづけます","Katazukemasu","Membereskan","clean"],
+["しまいます","Shimaimasu","Menyimpan","store"],
+["きめます","Kimemasu","Menentukan","decision"],
+["しらせます","Shirasemasu","Memberitahukan","notify"],
+["そうだんします","Soudan shimasu","Berunding","discuss"],
+["じゅぎょう","Jugyou","Pelajaran","class"],
+["こうぎ","Kougi","Kuliah","lecture"],
+["ミーティング","Mi-tingu","Rapat","meeting"],
+["よてい","Yotei","Rencana","plan"],
+["カレンダー","Karendaa-","Kalender","calendar"],
+["ポスター","Posuta-","Poster","poster"],
+["ごみばこ","Gomibako","Tempat sampah","trash-can"],
+["にんぎょう","Ningyou","Boneka","doll"],
+["かびん","Kabin","Vas bunga","vase"],
+["かがみ","Kagami","Cermin","mirror"],
+["ひきだし","Hikidashi","Laci","drawer"],
+["こうばん","Kouban","Pos polisi","police"],
+["いけ","Ike","Kolam","pond"],
+]},
+{id:31,name:"Bab 31",desc:"Sekolah & Upacara",col:"#FF4B4B",words:[
+["はじまります","Hajimarimasu","Dimulai","start"],
+["つづけます","Tsudukemasu","Melanjutkan","continue"],
+["みつけます","Mitsukemasu","Menemukan","find"],
+["うけます","Ukemasu","Mengikuti (ujian)","test"],
+["にゅうがくします","Nyuugaku shimasu","Masuk universitas","university"],
+["そつぎょうします","Sotsugyou shimasu","Lulus","graduation-cap"],
+["しゅっせきします","Shusseki shimasu","Menghadiri","attend"],
+["きゅうけいします","Kyuukei shimasu","Beristirahat","break"],
+["れんきゅう","Renkyuu","Hari libur berurutan","holiday"],
+["てんらんかい","Tenrankai","Pameran","exhibition"],
+["けっこんしき","Kekkonshiki","Upacara perkawinan","wedding"],
+["そうしき","Soushiki","Upacara kematian","funeral"],
+["きょうかい","Kyoukai","Gereja","church"],
+["だいがくいん","Daigakuin","Pasca sarjana","graduate-school"],
+["どうぶつえん","Doubutsuen","Kebun binatang","zoo"],
+["おんせん","Onsen","Sumber air panas","hot-spring"],
+["おきゃくさん","Okyakusan","Tamu","guest"],
+["インターネット","Inta-netto","Internet","internet"],
+["むら","Mura","Desa","village"],
+["えいがかん","Eigakan","Bioskop","cinema"],
+["うつくしい","Utsukushii","Indah","beautiful"],
+["しぜん","Shizen","Alam","nature"],
+]},
+{id:32,name:"Bab 32",desc:"Kesehatan & Cuaca",col:"#FF9600",words:[
+["うんどうします","Undou shimasu","Berolahraga","exercise"],
+["せいこうします","Seikou shimasu","Berhasil","success"],
+["しっぱいします","Shippai shimasu","Gagal","failure"],
+["ごうかくします","Goukaku shimasu","Lulus ujian","pass"],
+["もどります","Modorimasu","Kembali","return"],
+["やみます","Yamimasu","Berhenti (hujan)","stop-rain"],
+["はれます","Haremasu","Menjadi cerah","sunny"],
+["くもります","Kumorimasu","Menjadi mendung","cloudy"],
+["ふきます","Fukimasu","Bertiup (angin)","wind"],
+["なおります","Naorimasu","Sembuh","recovery"],
+["つづきます","Tsudukimasu","Berlanjut","continue"],
+["ひきます","Hikimasu","Masuk angin","cold"],
+["ひやします","Hiyashimasu","Mendinginkan","cool"],
+["じゅうぶん（な）","Juubun (na)","Cukup","sufficient"],
+["おかしい","Okashii","Lucu / Aneh","funny"],
+["うるさい","Urusai","Berisik","noise"],
+["やけど","Yakedo","Luka bakar","burn"],
+["けが","Kega","Luka / Cedera","injury"],
+["せき","Seki","Batuk","cough"],
+["インフルエンザ","Infuruenza","Influenza","flu"],
+["たいよう","Taiyou","Matahari","sun"],
+["ほし","Hoshi","Bintang","star"],
+["きた","Kita","Utara","north"],
+["みなみ","Minami","Selatan","south"],
+["ひがし","Higashi","Timur","east"],
+]},
+{id:33,name:"Bab 33",desc:"Larangan & Aturan",col:"#58CC02",words:[
+["にげます","Nigemasu","Melarikan diri","escape"],
+["さわぎます","Sawagimasu","Ribut-ribut","noise"],
+["あきらめます","Akiramemasu","Putus asa","give-up"],
+["なげます","Nagemasu","Melempar","throw"],
+["まもります","Mamorimasu","Mematuhi","protect"],
+["あげます","Agemasu","Menaikkan","up-arrow"],
+["さげます","Sagemasu","Menurunkan","down-arrow"],
+["つたえます","Tsutaemasu","Menyampaikan","message"],
+["ちゅういします","Chuui shimasu","Memperhatikan","caution"],
+["だめ（な）","Dame (na)","Jangan / Tidak boleh","no-sign"],
+["きそく","Kisoku","Peraturan","rules"],
+["たちいりきんし","Tachiiri kinshi","Dilarang masuk","no-entry"],
+["いりぐち","Iriguchi","Pintu masuk","entrance"],
+["でぐち","Deguchi","Pintu keluar","exit-sign"],
+["ひじょうぐち","Hijouguchi","Pintu darurat","emergency-exit"],
+["えいぎょうちゅう","Eigyou chuu","Buka (toko)","open-sign"],
+["けいさつ","Keisatsu","Polisi","police-car"],
+["ばっきん","Bakkin","Denda","fine"],
+["きゅうよう","Kyuuyou","Urusan mendadak","urgent"],
+["できるだけ","Dekiru dake","Sebisa mungkin","maximum"],
+]},
+{id:34,name:"Bab 34",desc:"Memasak & Resep",col:"#1CB0F6",words:[
+["みがきます","Migakimasu","Menggosok","polish"],
+["くみたてます","Kumitatemasu","Merakit","assemble"],
+["おります","Orimasu","Melipat","fold"],
+["つけます","Tsukemasu","Membumbui","spice"],
+["みつかります","Mitsukurimasu","Ditemukan","found"],
+["しつもんします","Shitsumon shimasu","Bertanya","question"],
+["ほそい","Hosoi","Tipis","thin"],
+["ふとい","Futoi","Tebal","thick"],
+["かぐ","Kagu","Peralatan","furniture"],
+["シートベルト","Shi-to beruto","Sabuk pengaman","seatbelt"],
+["せつめいしょ","Setsumei sho","Buku petunjuk","manual"],
+["しょうゆ","Shouyu","Kecap asin Jepang","soy-sauce"],
+["ソース","So-su","Saus","sauce"],
+["おちゃをたてます","Ocha wo tatemasu","Membuat teh","green-tea"],
+["にがい","Nigai","Pahit","bitter"],
+["ざいりょう","Zairyou","Bahan / Material","ingredient"],
+["とりにく","Tori niku","Daging ayam","chicken"],
+["たまねぎ","Tamanegi","Bawang bombai","onion"],
+["なべ","Nabe","Panci","cooking-pot"],
+["にます","Nimasu","Merebus","boil"],
+["どんぶり","Donburi","Mangkok besar","bowl"],
+]},
+{id:35,name:"Bab 35",desc:"Alam & Pemandangan",col:"#CE82FF",words:[
+["さきます","Sakimasu","Mekar (bunga)","flower"],
+["かわります","Kawarimasu","Berubah","change"],
+["こまります","Komarimasu","Mendapat kesulitan","problem"],
+["ひろいます","Hiroimasu","Memungut","pick-up"],
+["らく（な）","Raku (na)","Mudah / Ringan","easy"],
+["ただしい","Tadashii","Benar / Betul","correct"],
+["めずらしい","Mezurashii","Langka","rare"],
+["しま","Shima","Pulau","island"],
+["みなと","Minato","Pelabuhan","port"],
+["きんじょ","Kinjo","Tetangga","neighborhood"],
+["かいがい","Kaigai","Luar negeri","airplane"],
+["やまのぼり","Yama nobori","Pendakian gunung","mountain-hiking"],
+["ハイキング","Haikingu","Hiking","hiking"],
+["まる","Maru","Lingkaran","circle"],
+["カーテン","Ka-ten","Korden","curtain"],
+["は","Ha","Daun","leaf"],
+["きょく","Kyoku","Lagu / Musik","music-note"],
+["たのしみ","Tanoshimi","Kesenangan","joy"],
+["もっと","Motto","Lebih","more"],
+["やこうバス","Yakou basu","Bis malam","night-bus"],
+["スキーじょう","Suki- jou","Tempat bermain ski","ski-resort"],
+]},
+{id:36,name:"Bab 36",desc:"Teknologi & Masa Kini",col:"#FF4B4B",words:[
+["とどきます","Todokimasu","Sampai (barang)","delivery"],
+["うちます","Uchimasu","Mengetik","typing"],
+["ちょきんします","Chokin shimasu","Menabung","piggy-bank"],
+["ふとります","Futorimasu","Menjadi gemuk","weight-gain"],
+["やせます","Yasemasu","Menjadi kurus","weight-loss"],
+["すぎます","Sugimasu","Berlalu / Melewati","pass"],
+["なれます","Naremasu","Menjadi biasa","habit"],
+["かたい","Katai","Keras","hard"],
+["やわらかい","Yawarakai","Lunak","soft"],
+["でんし～","Denshi~","Elektronik","electronics"],
+["けいたい～","Keitai~","Yang mudah dibawa","smartphone"],
+["こうじょう","Koujou","Pabrik","factory"],
+["まいしゅう","Maishuu","Setiap minggu","weekly"],
+["まいつき","Maitsuki","Setiap bulan","monthly"],
+["まいとし","Maitoshi","Setiap tahun","yearly"],
+["やっと","Yatto","Akhirnya","finally"],
+["かなり","Kanari","Lumayan / Agak","considerably"],
+["かならず","Kanarazu","Pasti","certainty"],
+["このごろ","Kono goro","Akhir-akhir ini","recent"],
+["とくべつ（な）","Tokubetsu (na)","Khusus / Istimewa","special"],
+["すいえい","Suiei","Berenang","swimming"],
+["チャレンジします","Charenji shimasu","Menantang","challenge"],
+]},
+{id:37,name:"Bab 37",desc:"Industri & Penemuan",col:"#FF9600",words:[
+["ほめます","Homemasu","Memuji","praise"],
+["しかります","Shikarimasu","Memarahi","scold"],
+["さそいます","Saorimasu","Mengajak","invite"],
+["おこします","Okoshimasu","Membangunkan","alarm"],
+["しょうたいします","Shoutai shimasu","Mengundang","invitation"],
+["たのみます","Tanomimasu","Meminta","request"],
+["こわします","Kowashimasu","Merusakkan","break"],
+["ゆしゅつします","Yushutsu shimasu","Mengekspor","export"],
+["ゆにゅうします","Yunyuu shimasu","Mengimpor","import"],
+["ほんやくします","Honyaku shimasu","Menerjemahkan","translate"],
+["はつめいします","Hatsumei shimasu","Menciptakan","invention"],
+["はっけんします","Hakken shimasu","Menemukan","discovery"],
+["せっけいします","Sekkei shimasu","Merancang","design"],
+["こめ","Kome","Beras","rice"],
+["むぎ","Mugi","Gandum","wheat"],
+["せきゆ","Sekiyu","Minyak tanah","petroleum"],
+["どろぼう","Dorobou","Pencuri","thief"],
+["けいかん","Keikan","Polisi","police-officer"],
+["けんちくか","Kenchiku-ka","Arsitek","architect"],
+["かがくしゃ","Kagaku-sha","Ahli ilmu pengetahuan","scientist"],
+["ぎじゅつ","Gijutsu","Teknologi","technology"],
+["とち","Tochi","Tanah","land"],
+]},
+{id:38,name:"Bab 38",desc:"Rumah Sakit & Keluarga",col:"#58CC02",words:[
+["そだてます","Sodatemasu","Membesarkan","raise-child"],
+["にゅういんします","Nyuuin shimasu","Masuk rumah sakit","hospital"],
+["たいいんします","Taiin shimasu","Keluar dari rumah sakit","discharge"],
+["きもちがいい","Kimochi ga ii","Senang / Merasa enak","happy"],
+["きもちがわるい","Kimochi ga warui","Jijik / Tidak enak","sick"],
+["おおきな～","Ookina~","Besar","big"],
+["あかちゃん","Akachan","Bayi","baby"],
+["しょうがっこう","Shougakkou","SD","elementary-school"],
+["ちゅうがっこう","Chuugakkou","SMP","middle-school"],
+["かいがん","Kaigan","Pantai","beach"],
+["うそ","Uso","Bohong","lie"],
+["しょるい","Shorui","Dokumen","document"],
+["はんこ","Hanko","Cap / Stempel","stamp-seal"],
+["ふたご","Futago","Kembar","twins"],
+["せいかく","Seikaku","Tabiat / Sifat","personality"],
+["おとなしい","Otonashii","Pendiam / Patuh","quiet"],
+["クラス","Kurasu","Kelas","class"],
+["ようふく","Youfuku","Pakaian","clothes"],
+["ぶつかります","Butsukurimasu","Bertubrukan","collision"],
+]},
+{id:39,name:"Bab 39",desc:"Kejadian & Peristiwa",col:"#1CB0F6",words:[
+["こたえます","Kotaemasu","Menjawab","answer"],
+["たおれます","Taoremasu","Roboh / Tumbang","fall-down"],
+["やけます","Yakemasu","Terbakar","fire"],
+["とおります","Toorimasu","Melewati","pass-through"],
+["しにます","Shinimasu","Meninggal / Mati","death"],
+["びっくりします","Bikkuri shimasu","Terkejut","surprised"],
+["がっかりします","Gakkari shimasu","Kecewa","disappointed"],
+["あんしんします","Anshin shimasu","Merasa lega","relieved"],
+["ちこくします","Chikoku shimasu","Datang terlambat","late"],
+["けんかします","Kenka shimasu","Berkelahi","fight"],
+["りこんします","Rikon shimasu","Bercerai","divorce"],
+["ふくざつ（な）","Fukuzatsu (na)","Rumit","complex"],
+["かなしい","Kanashii","Sedih","sad"],
+["うれしい","Ureshii","Senang","happy"],
+["はずかしい","Hazukashii","Malu","embarrassed"],
+["じしん","Jishin","Gempa bumi","earthquake"],
+["たいふう","Taifuu","Topan","storm"],
+["かじ","Kaji","Kebakaran","fire-alarm"],
+["じこ","Jiko","Kecelakaan","accident"],
+["おとな","Otona","Orang dewasa","adult"],
+]},
+{id:40,name:"Bab 40",desc:"Pengukuran & Perjalanan",col:"#CE82FF",words:[
+["かぞえます","Kazoemasu","Menghitung","counting"],
+["はかります","Hakarimasu","Menimbang","scale"],
+["たしかめます","Tashikamemasu","Memastikan","confirm"],
+["しゅっぱつします","Shuppatsu shimasu","Berangkat","departure"],
+["とうちゃくします","Touchasku shimasu","Tiba","arrival"],
+["よいます","Yoimasu","Mabuk","dizzy"],
+["きけん（な）","Kiken (na)","Bahaya","danger"],
+["ひつよう（な）","Hitsuyou (na)","Perlu","necessary"],
+["うちゅう","Uchuu","Luar angkasa","space"],
+["ちきゅう","Chikyuu","Bumi","earth"],
+["ぼうねんかい","Bounenkai","Pesta akhir tahun","party"],
+["マラソン","Marason","Maraton","marathon"],
+["おもて","Omote","Bagian muka","front"],
+["うら","Ura","Bagian belakang","back"],
+["まちがい","Machigai","Kesalahan","mistake"],
+["ほんとう","Hontou","Kebenaran / Fakta","truth"],
+["ズボン","Zubon","Celana panjang","pants"],
+["テスト","Tesuto","Tes / Ujian","test"],
+["せいせき","Seiseki","Hasil / Prestasi","grade"],
+["ところで","Tokorode","Ngomong-ngomong","chat"],
+]},
+{id:41,name:"Bab 41",desc:"Hadiah & Hewan",col:"#FF4B4B",words:[
+["いただきます","Itadakimasu","Menerima (hormat)","receive"],
+["くださいます","Kudasaimasu","Memberi (hormat)","gift"],
+["やります","Yarimasu","Memberikan","give"],
+["よびます","Yobimasu","Memanggil","call"],
+["とりかえます","Torikaemasu","Mengganti","exchange"],
+["しんせつにします","Shinsetsu ni shimasu","Bersikap ramah","kind"],
+["かわいい","Kawaii","Imut","cute"],
+["おいわい","Oiwai","Perayaan","celebration"],
+["おとしだま","Otoshidama","Ampau / Uang tahun baru","envelope"],
+["おみまい","Omimai","Besuk orang sakit","hospital-visit"],
+["じょうほう","Jouhou","Informasi","info"],
+["ぶんぽう","Bunpou","Tata bahasa","grammar"],
+["さる","Saru","Monyet","monkey"],
+["えさ","Esa","Makanan hewan","pet-food"],
+["おもちゃ","Omocha","Mainan","toy"],
+["えほん","Ehon","Buku gambar","picture-book"],
+["ドライバー","Doraiba-","Obeng","screwdriver"],
+["ハンカチ","Hankachi","Sapu tangan","handkerchief"],
+["くつした","Kutsushita","Kaos kaki","socks"],
+["てぶくろ","Tebukuro","Sarung tangan","gloves"],
+["ゆびわ","Yubiwa","Cincin","ring"],
+["そふ","Sofu","Kakek (sendiri)","grandfather"],
+["そぼ","Sobo","Nenek (sendiri)","grandmother"],
+["まご","Mago","Cucu","grandchild"],
+["おじ","Oji","Paman","uncle"],
+["おば","Oba","Tante","aunt"],
+]},
+{id:42,name:"Bab 42",desc:"Memasak & Budaya",col:"#FF9600",words:[
+["つつみます","Tsutsumimasu","Membungkus","wrap"],
+["わかします","Wakashimasu","Merebus","boil"],
+["まぜます","Mazemasu","Mencampur","mix"],
+["けいさんします","Keisan shimasu","Menghitung","calculator"],
+["べんごし","Bengoshi","Pengacara","lawyer"],
+["おんがくか","Ongakuka","Ahli musik","musician"],
+["きょういく","Kyouiku","Pendidikan","education"],
+["れきし","Rekishi","Sejarah","history"],
+["ぶんか","Bunka","Budaya","culture"],
+["しゃかい","Shakai","Masyarakat","society"],
+["ほうりつ","Houritsu","Hukum","law"],
+["へいわ","Heiwa","Damai","peace"],
+["もくてき","Mokuteki","Tujuan","target"],
+["あんぜん","Anzen","Keselamatan","safety"],
+["ろんぶん","Ronbun","Skripsi","thesis"],
+["ミキサー","Mikisa-","Blender","blender"],
+["かんきり","Kankiri","Pembuka kaleng","can-opener"],
+["かんずめ","Kanzume","Makanan kaleng","canned-food"],
+["そろばん","Soroban","Alat hitung cina","abacus"],
+["たいおんけい","Taioonkei","Termometer","thermometer"],
+["ピラミッド","Piramiddo","Piramid","pyramid"],
+["ローン","Ro-n","Kredit","loan"],
+["なぜ","Naze","Mengapa","why"],
+]},
+{id:43,name:"Bab 43",desc:"Naik Turun & Kondisi",col:"#58CC02",words:[
+["ふえます","Fuemasu","Meningkat","increase"],
+["へります","Herimasu","Menurun","decrease"],
+["あがります","Agarimasu","Naik","up-arrow"],
+["さがります","Sagarimasu","Turun","down-arrow"],
+["きれます","Kiremasu","Putus","cut"],
+["とれます","Toremasu","Lepas","detach"],
+["おちます","Ochimasu","Jatuh","fall"],
+["なくなります","Nakunarimasu","Habis","empty"],
+["じょうぶ（な）","Joubu (na)","Kuat","strong"],
+["へん","Hen","Aneh","strange"],
+["しあわせ（な）","Shiawase (na)","Bahagia","happy"],
+["うまい","Umai","Enak","delicious"],
+["まずい","Mazui","Tidak enak","bad-taste"],
+["つまらない","Tsumaranai","Bosan","bored"],
+["ガソリン","Gasorin","Bensin","gas-station"],
+["だんぼう","Danbou","Pemanas","heater"],
+["れいぼう","Reibou","Pendingin","air-conditioner"],
+["かいいん","Kaiin","Anggota","member"],
+["ねんれい","Nenrei","Umur","age"],
+["しゅうにゅう","Shuunyuu","Pendapatan","income"],
+["ぴったり","Pittari","Pas sekali","perfect-fit"],
+["そのうえ","Sono ue","Lagi pula","plus"],
+]},
+{id:44,name:"Bab 44",desc:"Perasaan & Ekspresi",col:"#1CB0F6",words:[
+["なきます","Nakimasu","Menangis","crying"],
+["わらいます","Waraimasu","Tertawa","laughing"],
+["かわきます","Kawakimasu","Mengeringkan","dry"],
+["ぬれます","Nuremasu","Basah","wet"],
+["すべります","Suberimasu","Terpeleset","slip"],
+["ていねい（な）","Teinei (na)","Sopan / Rapi","polite"],
+["くうき","Kuuki","Udara","air"],
+["なみだ","Namida","Air mata","tear"],
+["わしょく","Washoku","Makanan Jepang","japanese-food"],
+["ようしょく","Youshoku","Makanan Barat","western-food"],
+["おかず","Okazu","Lauk pauk","side-dish"],
+["りょう","Ryou","Jumlah","amount"],
+["はんぶん","Hanbun","Setengah","half"],
+["シングル","Shinguru","Kamar u/ seorang","single-room"],
+["ツイン","Tsuin","Kamar u/ dua orang","twin-room"],
+["りゆう","Riyuu","Alasan","reason"],
+["えんぎがわるい","Engi ga warui","Membawa sial","bad-luck"],
+["じゅんじょ","Junjo","Urutan","order"],
+["ひょうげん","Hyougen","Ungkapan","expression"],
+]},
+{id:45,name:"Bab 45",desc:"Perjalanan & Camping",col:"#CE82FF",words:[
+["あやまります","Ayamarimasu","Meminta maaf","apologize"],
+["しんじます","Shinjimasu","Percaya","believe"],
+["よういします","Youi shimasu","Mempersiapkan","prepare"],
+["キャンセルします","Kyanseru shimasu","Membatalkan","cancel"],
+["うまくいきます","Umaku ikimasu","Berhasil dengan baik","success"],
+["ほしょうしょ","Hoshousho","Garansi","warranty"],
+["おくりもの","Okurimono","Hadiah","gift"],
+["まちがいでんわ","Machigai denwa","Salah sambung","wrong-call"],
+["キャンプ","Kyanpu","Kemping","camping"],
+["てん","Ten","Nilai","score"],
+["ちゃんと","Chanto","Secara teratur","check"],
+["きゅうに","Kyuu ni","Tiba-tiba","suddenly"],
+["いじょうです","Ijou desu","Sekian / Selesai","end"],
+["たのしみにしています","Tanoshimi ni shitemasu","Mengharapkan dengan gembira","excited"],
+["コース","Ko-su","Lintasan / Kursus","course"],
+["スタート","Suta-to","Start","start"],
+["ゆうしょうします","Yuushou shimasu","Menjadi juara","champion"],
+["なやみ","Nayami","Kesulitan / Kesusahan","worry"],
+["めざましどけい","Mezamashi dokei","Jam alarm","alarm-clock"],
+["ガイド","Gaido","Pemandu","guide"],
+["それでも","Soredemo","Meskipun demikian","but"],
+]},
+{id:46,name:"Bab 46",desc:"Pengiriman & Komunikasi",col:"#FF4B4B",words:[
+["やきます","Yakimasu","Membakar","grill"],
+["わたします","Watashimasu","Menyerahkan","hand-over"],
+["かえってきます","Kaette kimasu","Kembali lagi","return"],
+["むかいます","Mukaimasu","Menuju ke","direction"],
+["にゅうりょくします","Nyuuryoku shimasu","Memasukkan (data)","input"],
+["るす","Rusu","Tidak ada di rumah","away"],
+["たくはいびん","Takuhai bin","Jasa pengantaran","delivery"],
+["げんいん","Gen'in","Penyebab","cause"],
+["ちゅうしゃ","Chuusha","Suntikan","injection"],
+["しょくよく","Shokuyoku","Nafsu makan","appetite"],
+["パンフレット","Panfuretto","Pamflet","brochure"],
+["ちょうど","Choudo","Pas / Tepat","exact"],
+["たったいま","Tatta ima","Baru saja","just-now"],
+["ぐあい","Guai","Keadaan","condition"],
+["ちしき","Chishiki","Pengetahuan","knowledge"],
+["びょう","Byou","Detik","second"],
+]},
+{id:47,name:"Bab 47",desc:"Pancaindra & Alam",col:"#FF9600",words:[
+["あつまります","Atsumarimasu","Berkumpul","gathering"],
+["わかれます","Wakaremasu","Berpisah","goodbye"],
+["ながいきします","Nagaiki shimasu","Berumur panjang","longevity"],
+["おとがします","Oto ga shimasu","Terdengar bunyi","sound"],
+["あじがします","Aji ga shimasu","Terasa (rasa)","taste"],
+["においがします","Nioi ga shimasu","Tercium bau","smell"],
+["かさをさします","Kasa wo sashimasu","Membuka payung","umbrella"],
+["ひどい","Hidoi","Luar biasa (parah)","terrible"],
+["こわい","Kowai","Takut","fear"],
+["てんきよほう","Tenki yohou","Perkiraan cuaca","weather-forecast"],
+["はっぴょう","Happyou","Pengumuman","announcement"],
+["じっけん","Jikken","Percobaan","experiment"],
+["じんこう","Jinkou","Populasi","population"],
+["かがく","Kagaku","Ilmu pengetahuan","science"],
+["いがく","Igaku","Ilmu kedokteran","medicine"],
+["ぶんがく","Bungaku","Sastra","literature"],
+["パトカー","Patoka-","Mobil patroli","police-car"],
+["きゅうきゅうしゃ","Kyuukyuusha","Ambulans","ambulance"],
+["さんせい","Sansei","Setuju","agree"],
+["はんたい","Hantai","Tidak setuju","disagree"],
+["だんせい","Dansei","Pria","male"],
+["じょせい","Josei","Wanita","female"],
+["こいびと","Koibito","Pacar","couple"],
+["こんやくします","Konyaku shimasu","Bertunangan","engagement"],
+["はかせ","Hakase","Doktor","doctorate"],
+["のう","Nou","Otak","brain"],
+]},
+{id:48,name:"Bab 48",desc:"Aturan & Fasilitas",col:"#58CC02",words:[
+["おろします","Oroshimasu","Menurunkan","lower"],
+["とどけます","Todokemasu","Mengantarkan","deliver"],
+["せわをします","Sewa wo shimasu","Mengurus","care"],
+["いや（な）","Iya (na)","Tidak suka","dislike"],
+["きびしい","Kibishii","Disiplin / Galak","strict"],
+["じゅく","Juku","Les / Kursus","cram-school"],
+["スケジュール","Sukejuu-ru","Jadwal / Rencana","schedule"],
+["せいと","Seito","Murid","student"],
+["にゅうかん","Nyuukan","Kantor imigrasi","immigration"],
+["じゆうに","Jiyuu ni","Dengan bebas","freedom"],
+["えいぎょう","Eigyou","Bisnis","business"],
+["かまいません","Kamaimasen","Tidak apa-apa / Boleh","ok"],
+["たのしみます","Tanoshimimasu","Menikmati","enjoy"],
+["きょうそうします","Kyousou shimasu","Berlomba","competition"],
+["げい","Gei","Keahlian","skill"],
+["サーカス","Sa-kasu","Sirkus","circus"],
+["うつくしい","Utsukushii","Indah","beautiful"],
+["すがた","Sugata","Penampilan","appearance"],
+["にとって","Ni totte","Bagi","for"],
+["けしょうします","Keshou shimasu","Berdandan","makeup"],
+]},
+{id:49,name:"Bab 49",desc:"Bahasa Hormat I",col:"#1CB0F6",words:[
+["つとめます","Tsutomemasu","Bekerja (di)","work"],
+["いらっしゃいます","Irasshaimasu","Ada / Pergi / Datang (hormat)","vip"],
+["めしあがります","Meshiagarimasu","Makan / Minum (hormat)","dining"],
+["おっしゃいます","Osshaimasu","Berkata (hormat)","speech"],
+["なさいます","Nasaimasu","Melakukan (hormat)","do"],
+["ごらんになります","Goran ni narimasu","Melihat (hormat)","view"],
+["ごぞんじです","Gozonji desu","Mengetahui (hormat)","knowledge"],
+["あいさつ","Aisatsu","Salam","greeting"],
+["りょかん","Ryokan","Penginapan ala Jepang","ryokan"],
+["かいじょう","Kaijou","Tempat pertemuan","venue"],
+["バスてい","Basu tei","Halte bus","bus-stop"],
+["ぼうえき","Boueki","Perdagangan","trade"],
+["～さま","-sama","Tuan / Nyonya (hormat)","vip"],
+["たまに","Tama ni","Sesekali","occasionally"],
+["えんりょなく","Enryo naku","Tanpa malu-malu","free"],
+["さくひん","Sakuhin","Karya","art"],
+["せかいてきに","Sekai teki ni","Seluruh dunia","global"],
+["ちょうなん","Chounan","Anak laki-laki tertua","son"],
+["さっきょく","Sakkyoku","Komposisi lagu","music-compose"],
+["かつどう","Katsudou","Kegiatan","activity"],
+]},
+{id:50,name:"Bab 50",desc:"Bahasa Hormat II",col:"#CE82FF",words:[
+["まいります","Mairimasu","Pergi / Datang (kenjougo)","humble"],
+["おります","Orimasu","Ada (kenjougo)","exist"],
+["いただきます","Itadakimasu","Makan / Minum / Menerima (kenjougo)","receive"],
+["もうします","Moushimasu","Berkata (kenjougo)","speech"],
+["いたします","Itashimasu","Melakukan (kenjougo)","do"],
+["はいけんします","Haiken shimasu","Melihat (kenjougo)","view"],
+["ぞんじます","Zonjimasu","Mengetahui (kenjougo)","knowledge"],
+["うかがいます","Ukagaimasu","Bertanya / Mengunjungi (kenjougo)","visit"],
+["おめにかかります","Ome ni kakarimasu","Bertemu (kenjougo)","meeting"],
+["ございます","Gozaimasu","Ada (kenjougo)","exist"],
+["わたくし","Watakushi","Saya (kenjougo)","person"],
+["ガイド","Gaido","Pemandu","guide"],
+["おたく","Otaku","Rumah orang lain","house"],
+["こうがい","Kougai","Pinggiran kota","suburb"],
+["アルバム","Arubamu","Album","photo-album"],
+["さらいしゅう","Sarai shuu","Dua minggu lagi","calendar"],
+["さいしょに","Saisho ni","Pertama / Mula-mula","first"],
+["さいごに","Saigo ni","Terakhir","last"],
+["ゆめがかないます","Yume ga kanaemasu","Menjadi kenyataan","dream"],
+["きょうりょくします","Kyouryoku shimasu","Bekerja sama","teamwork"],
+["かんしゃします","Kansha shimasu","Berterima kasih","gratitude"],
+["おれい","Orei","Ucapan terima kasih","thank-you"],
+["はいけい","Haikei","Dengan hormat","letter"],
+["めいわくをかけます","Meiwaku wo kakemasu","Merepotkan","trouble"],
+["いかします","Ikashimasu","Memanfaatkan","use"],
+]},
+];
+
+// ==================== STATE ====================
+let G={mode:'mcq',babId:1,queue:[],cur:0,xp:0,answered:false,correct:false,startTime:0,sessionOk:0,sessionTotal:0,wordOrder:{target:[],pool:[],answer:[]},isFlipped:false};
+let sv={};
+try{sv=JSON.parse(localStorage.getItem('nhf3')||'{}');}catch(e){}
+let gXP=sv.xp||0,gOk=sv.ok||0,gWrd=sv.wrd||0,babProg=sv.prog||{};
+let curMode='mcq';
+
+// ==================== ICONS8 ====================
+function i8url(kw,sz=80){
+  return `https://img.icons8.com/fluency/${sz}/${encodeURIComponent(kw.toLowerCase().replace(/ /g,'-'))}.png`;
+}
+function wimg(w,sz=80){return i8url(w[3]||'japanese',sz);}
+function imgTag(w,sz=80,cls=''){
+  return `<img src="${wimg(w,sz)}" width="${sz}" height="${sz}" class="${cls}" onerror="this.style.display='none'" loading="lazy" style="display:block;margin:0 auto 10px;border-radius:10px;object-fit:contain;">`;
+}
+
+// ==================== HOME ====================
+function renderHome(){
+  document.getElementById('hxp').textContent=gXP;
+  document.getElementById('hok').textContent=gOk;
+  document.getElementById('hwrd').textContent=gWrd;
+  const list=document.getElementById('blist');
+  list.innerHTML=BABS.map(b=>{
+    const p=Math.min(100,babProg[b.id]||0);
+    return `<div class="bab" onclick="startBab(${b.id})">
+      <div class="bab-ico" style="background:${b.col}22;color:${b.col}">${b.id}</div>
+      <div class="bab-info">
+        <div class="bab-name">${b.name}: ${b.desc}</div>
+        <div class="bab-cnt">${b.words.length} kata</div>
+        <div class="bab-bar"><div class="bab-fill" style="width:${p}%;background:${b.col}"></div></div>
+      </div>
+      <div class="bab-pct" style="background:${b.col}22;color:${b.col}">${p}%</div>
+    </div>`;
+  }).join('');
+}
+
+function setMode(m,el){
+  curMode=m;
+  document.querySelectorAll('.mtile').forEach(t=>t.classList.remove('sel'));
+  el.classList.add('sel');
+}
+
+function startBab(id){
+  G.babId=id; G.mode=curMode;
+  const bab=BABS.find(b=>b.id===id);
+  G.queue=shuf([...bab.words]).slice(0,Math.min(10,bab.words.length));
+  G.cur=0; G.xp=0; G.answered=false;
+  G.sessionOk=0; G.sessionTotal=0; G.startTime=Date.now();
+  showScr('s-game'); updProg(); renderQ();
+}
+
+// ==================== GAME ====================
+function updProg(){
+  const pct=G.queue.length?(G.cur/G.queue.length)*100:0;
+  document.getElementById('gpf').style.width=pct+'%';
+  document.getElementById('gxp').textContent=G.xp+' XP';
+}
+
+function setBtn(txt='PERIKSA',cls='green',dis=true){
+  const b=document.getElementById('abtn');
+  b.textContent=txt; b.className='abtn '+cls; b.disabled=dis; b.onclick=handleAct;
+}
+
+function renderQ(){
+  const w=G.queue[G.cur];
+  if(!w){showDone();return;}
+  G.answered=false; updProg(); setBtn('PERIKSA','green',true);
+  const bd=document.getElementById('gbody'); bd.innerHTML='';
+  const m=G.mode;
+  if(m==='flip')renderFlip(w,bd);
+  else if(m==='mcq')renderMCQ(w,bd);
+  else if(m==='typing')renderTyping(w,bd);
+  else if(m==='visual')renderVisual(w,bd);
+  else if(m==='listen')renderListen(w,bd);
+  else if(m==='order')renderOrder(w,bd);
+}
+
+// FLIP
+function renderFlip(w,el){
+  G.isFlipped=false;
+  el.innerHTML=`<div class="qbadge">🃏 Flip Card</div>
+    <div class="qtxt">Ketuk kartu untuk melihat artinya!</div>
+    <div class="fp" onclick="doFlip()">
+      <div class="fi" id="fi">
+        <div class="ff">${imgTag(w,76)}<div class="wjp">${w[0]}</div><div class="wroma">${w[1]}</div><div class="fhint">👆 Ketuk untuk balik</div></div>
+        <div class="fb">${imgTag(w,64)}<div class="warti">${w[2]}</div><div class="wroma">${w[1]}</div><div style="font-size:13px;color:var(--text3);margin-top:6px;">${w[0]}</div></div>
+      </div>
+    </div>`;
+  const b=document.getElementById('abtn'); b.textContent='LANJUT ▶'; b.disabled=false; b.onclick=()=>nextQ(true);
+}
+function doFlip(){G.isFlipped=!G.isFlipped;document.getElementById('fi').classList.toggle('flipped',G.isFlipped);}
+
+// MCQ
+function renderMCQ(w,el){
+  const bab=BABS.find(b=>b.id===G.babId);
+  const pool=bab.words.filter(x=>x[0]!==w[0]);
+  const opts=shuf([w,...shuf(pool).slice(0,3)]);
+  const lbls=['A','B','C','D'];
+  el.innerHTML=`<div class="qbadge">🎯 Pilihan Ganda</div>
+    <div class="wcard">${imgTag(w,76)}<div class="wjp">${w[0]}</div><div class="wroma">${w[1]}</div></div>
+    <div class="qtxt">Apa artinya?</div>
+    <div class="opts">
+      ${opts.map((o,i)=>`<button class="opt" data-a="${o[2]}" onclick="pickMCQ(this,'${o[2]}','${w[2]}')">${'<div class="olbl">'+lbls[i]+'</div><span>'+o[2]+'</span>'}</button>`).join('')}
+    </div>`;
+}
+function pickMCQ(btn,chosen,correct){
+  if(G.answered)return; G.answered=true;
+  const ok=chosen===correct; G.correct=ok;
+  document.querySelectorAll('.opt').forEach(b=>{
+    b.disabled=true;
+    if(b.dataset.a===correct)b.classList.add('c-ok');
+    else if(b===btn&&!ok)b.classList.add('c-ng');
+  });
+  showResult(ok,correct);
+}
+
+// TYPING
+function renderTyping(w,el){
+  el.innerHTML=`<div class="qbadge">⌨️ Ketik Jawaban</div>
+    <div class="wcard">${imgTag(w,76)}<div class="wjp">${w[0]}</div><div class="wroma">${w[1]}</div></div>
+    <div class="qtxt">Ketik artinya dalam bahasa Indonesia:</div>
+    <input id="ti" class="tinp" type="text" placeholder="Tulis di sini..." autocomplete="off" autocorrect="off" spellcheck="false">
+    <div class="thint">Tidak perlu huruf kapital</div>`;
+  const inp=document.getElementById('ti');
+  inp.addEventListener('input',()=>{document.getElementById('abtn').disabled=!inp.value.trim();});
+  inp.addEventListener('keydown',e=>{if(e.key==='Enter'&&!document.getElementById('abtn').disabled)handleAct();});
+  inp.focus();
+  document.getElementById('abtn').onclick=()=>checkTyping(w);
+  document.getElementById('abtn').disabled=true;
+}
+function checkTyping(w){
+  if(G.answered){nextQ(G.correct);return;}
+  const inp=document.getElementById('ti');
+  const val=inp.value.trim().toLowerCase();
+  const cor=w[2].toLowerCase();
+  const n=s=>s.replace(/[^a-z0-9]/g,'');
+  const ok=n(val)===n(cor)||cor.split('/').some(p=>n(val)===n(p.trim()));
+  G.answered=true; G.correct=ok; inp.disabled=true; inp.classList.add(ok?'ok':'ng');
+  showResult(ok,w[2]); document.getElementById('abtn').onclick=()=>nextQ(ok);
+}
+
+// VISUAL
+function renderVisual(w,el){
+  const bab=BABS.find(b=>b.id===G.babId);
+  const pool=bab.words.filter(x=>x[0]!==w[0]);
+  const opts=shuf([w,...shuf(pool).slice(0,3)]);
+  el.innerHTML=`<div class="qbadge">🖼️ Visual Match</div>
+    <div class="qtxt" style="font-size:17px;font-weight:900;text-align:center;margin-bottom:14px;">Mana yang artinya <span style="color:var(--yellow)">"${w[2]}"</span>?</div>
+    <div class="vgrid">
+      ${opts.map(o=>`<div class="vtile" data-jp="${o[0]}" onclick="pickVis(this,'${o[0]}','${w[0]}')">
+        <img src="${wimg(o,52)}" width="52" height="52" onerror="this.style.display='none'" loading="lazy" style="display:block;margin:0 auto 8px;border-radius:8px;object-fit:contain;">
+        <div class="vtjp">${o[0]}</div><div class="vtroma">${o[1]}</div>
+      </div>`).join('')}
+    </div>`;
+}
+function pickVis(tile,chosen,correct){
+  if(G.answered)return; G.answered=true;
+  const ok=chosen===correct; G.correct=ok;
+  document.querySelectorAll('.vtile').forEach(t=>{
+    t.style.pointerEvents='none';
+    if(t.dataset.jp===correct)t.classList.add('c-ok');
+    else if(t===tile&&!ok)t.classList.add('c-ng');
+  });
+  showResult(ok,correct);
+}
+
+// LISTEN
+function renderListen(w,el){
+  const bab=BABS.find(b=>b.id===G.babId);
+  const pool=bab.words.filter(x=>x[0]!==w[0]);
+  const opts=shuf([w,...shuf(pool).slice(0,3)]);
+  const lbls=['A','B','C','D'];
+  el.innerHTML=`<div class="qbadge">🔊 Dengarkan</div>
+    <div class="qtxt">Dengarkan dan pilih artinya!</div>
+    <div class="lcard" onclick="spk('${w[0]}')"><div class="lico">🔊</div><div class="llbl">Ketuk untuk dengar</div></div>
+    <div class="opts">
+      ${opts.map((o,i)=>`<button class="opt" data-a="${o[2]}" onclick="pickMCQ(this,'${o[2]}','${w[2]}')">${'<div class="olbl">'+lbls[i]+'</div><span>'+o[2]+'</span>'}</button>`).join('')}
+    </div>`;
+  setTimeout(()=>spk(w[0]),500);
+}
+function spk(txt){
+  if(!window.speechSynthesis)return;
+  window.speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(txt);
+  u.lang='ja-JP'; u.rate=0.8; window.speechSynthesis.speak(u);
+}
+
+// ORDER
+function renderOrder(w,el){
+  const chars=[...w[0]];
+  const pool=shuf([...chars]);
+  G.wordOrder={target:[],pool:[...pool],answer:chars};
+  el.innerHTML=`<div class="qbadge">🔀 Susun Kata</div>
+    <div class="wcard">${imgTag(w,60)}<div class="warti">${w[2]}</div><div class="wroma">${w[1]}</div></div>
+    <div class="qtxt">Susun huruf-hurufnya:</div>
+    <div class="otgt" id="ot"><span style="color:var(--text3);font-size:13px;font-weight:600;">Letakkan huruf di sini...</span></div>
+    <div class="opool" id="op">${pool.map((c,i)=>`<div class="chip" id="c${i}" data-i="${i}" data-c="${c}" onclick="addChip(${i})">${c}</div>`).join('')}</div>`;
+}
+function addChip(idx){
+  const ch=document.getElementById('c'+idx);
+  if(!ch||ch.classList.contains('used'))return;
+  ch.classList.add('used'); G.wordOrder.target.push({idx,char:ch.dataset.c});
+  const tgt=document.getElementById('ot'); tgt.classList.add('has');
+  const ph=tgt.querySelector('span'); if(ph)ph.remove();
+  const nc=document.createElement('div'); nc.className='chip int';
+  nc.textContent=ch.dataset.c; nc.dataset.idx=idx;
+  nc.onclick=()=>rmChip(nc,idx); tgt.appendChild(nc);
+  document.getElementById('abtn').disabled=false;
+}
+function rmChip(nc,idx){
+  if(G.answered)return; nc.remove();
+  G.wordOrder.target=G.wordOrder.target.filter(t=>t.idx!==idx);
+  const o=document.getElementById('c'+idx); if(o)o.classList.remove('used');
+  const tgt=document.getElementById('ot');
+  if(!G.wordOrder.target.length){tgt.classList.remove('has');tgt.innerHTML='<span style="color:var(--text3);font-size:13px;font-weight:600;">Letakkan huruf di sini...</span>';document.getElementById('abtn').disabled=true;}
+}
+function checkOrder(w){
+  const composed=G.wordOrder.target.map(t=>t.char).join('');
+  const ok=composed===w[0]; G.answered=true; G.correct=ok;
+  showResult(ok,w[0]); document.getElementById('abtn').onclick=()=>nextQ(ok);
+}
+
+// ==================== RESULT ====================
+function showResult(ok,ans){
+  G.sessionTotal++;
+  let xpE=0;
+  if(ok){G.sessionOk++;xpE=10;G.xp+=xpE;gXP+=xpE;gOk++;gWrd++;sparks();xpPop(xpE);}
+  const bd=document.getElementById('gbody');
+  const box=document.createElement('div');
+  box.className='rbox '+(ok?'ok':'ng');
+  box.innerHTML=ok
+    ?`<div class="rtitle ok">✅ Benar! +${xpE} XP</div><div class="rans">Jawaban: ${ans}</div>`
+    :`<div class="rtitle ng">❌ Salah</div><div class="rans">Jawaban yang benar: <strong>${ans}</strong></div>`;
+  bd.appendChild(box); bd.scrollTo({top:bd.scrollHeight,behavior:'smooth'});
+  const b=document.getElementById('abtn');
+  b.textContent=ok?'LANJUT ▶':'GOT IT'; b.disabled=false;
+  b.className='abtn '+(ok?'green':'blue'); b.onclick=()=>nextQ(ok);
+  if(!ok){bd.classList.add('shake');setTimeout(()=>bd.classList.remove('shake'),400);}
+  updProg(); save();
+}
+
+function nextQ(){G.cur++; G.cur>=G.queue.length?showDone():renderQ();}
+
+function handleAct(){
+  if(G.answered){nextQ();return;}
+  const w=G.queue[G.cur];
+  if(G.mode==='typing')checkTyping(w);
+  else if(G.mode==='order')checkOrder(w);
+}
+
+// ==================== DONE ====================
+function showDone(){
+  const el=Math.round((Date.now()-G.startTime)/1000);
+  const m=Math.floor(el/60),s=el%60;
+  const acc=G.sessionTotal?Math.round((G.sessionOk/G.sessionTotal)*100):0;
+  babProg[G.babId]=Math.min(100,(babProg[G.babId]||0)+Math.round(acc/3));
+  save();
+  document.getElementById('dtrophy').textContent=acc>=80?'🏆':acc>=50?'🎉':'💪';
+  document.getElementById('dtitle').textContent=acc>=80?'Sempurna!':acc>=50?'Bagus!':'Terus Berlatih!';
+  document.getElementById('dsub').textContent=`${G.sessionOk}/${G.sessionTotal} benar • ${G.xp} XP`;
+  document.getElementById('dsxp').textContent=G.xp;
+  document.getElementById('dsacc').textContent=acc+'%';
+  document.getElementById('dsok').textContent=`${G.sessionOk}/${G.sessionTotal}`;
+  showScr('s-done'); if(acc>=70)sparks(20);
+}
+
+function restartGame(){
+  const bab=BABS.find(b=>b.id===G.babId);
+  G.queue=shuf([...bab.words]).slice(0,Math.min(10,bab.words.length));
+  G.cur=0;G.xp=0;G.answered=false;G.sessionOk=0;G.sessionTotal=0;G.startTime=Date.now();
+  showScr('s-game');updProg();renderQ();
+}
+function goHome(){showScr('s-home');renderHome();}
+
+// ==================== FX ====================
+function sparks(n=12){
+  const e=['⭐','✨','🎉','🌟','💫','🎊'];
+  for(let i=0;i<n;i++)setTimeout(()=>{
+    const p=document.createElement('div'); p.className='ptcl';
+    p.textContent=e[~~(Math.random()*e.length)];
+    p.style.cssText=`left:${Math.random()*100}vw;top:0;animation-duration:${1+Math.random()}s;font-size:${14+~~(Math.random()*10)}px`;
+    document.body.appendChild(p); setTimeout(()=>p.remove(),2200);
+  },i*70);
+}
+function xpPop(v){
+  const p=document.createElement('div'); p.className='xppop';
+  p.textContent=`+${v} XP ⭐`; p.style.cssText='left:50%;top:40%';
+  document.body.appendChild(p); setTimeout(()=>p.remove(),1100);
+}
+
+// ==================== UTIL ====================
+function showScr(id){document.querySelectorAll('.scr').forEach(s=>s.classList.remove('on'));document.getElementById(id).classList.add('on');}
+function shuf(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=~~(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]];}return b;}
+function save(){localStorage.setItem('nhf3',JSON.stringify({xp:gXP,ok:gOk,wrd:gWrd,prog:babProg}));}
+
+// ==================== WRONG WORDS TRACKING ====================
+let wrongWords=[];
+try{wrongWords=JSON.parse(localStorage.getItem('nhf3_wrong')||'[]');}catch(e){}
+function saveWrong(){localStorage.setItem('nhf3_wrong',JSON.stringify(wrongWords));}
+
+// Patch showResult to track wrong answers
+const _origShowResult=showResult;
+showResult=function(ok,ans){
+  if(!ok){
+    const w=G.queue[G.cur];
+    if(w&&!wrongWords.find(x=>x[0]===w[0])){
+      wrongWords.push(w);
+      if(wrongWords.length>150)wrongWords.shift();
+      saveWrong();
+    }
+  }
+  _origShowResult(ok,ans);
+};
+
+// ==================== RANDOM ALL BABS ====================
+function startRandom(){
+  const allWords=BABS.flatMap(b=>b.words);
+  G.babId=null; G.mode=curMode;
+  G.queue=shuf([...allWords]).slice(0,15);
+  G._allWords=allWords;
+  G.cur=0;G.xp=0;G.answered=false;
+  G.sessionOk=0;G.sessionTotal=0;G.startTime=Date.now();
+  showScr('s-game');updProg();renderQEx();
+}
+
+// ==================== REVIEW MODE ====================
+function startReview(){
+  if(!wrongWords.length){alert('Belum ada kata yang salah! Kerjakan latihan dulu 😊');return;}
+  const allWords=BABS.flatMap(b=>b.words);
+  G.babId=null; G.mode=curMode;
+  G.queue=shuf([...wrongWords]).slice(0,15);
+  G._allWords=allWords;
+  G.cur=0;G.xp=0;G.answered=false;
+  G.sessionOk=0;G.sessionTotal=0;G.startTime=Date.now();
+  showScr('s-game');updProg();renderQEx();
+}
+
+// Extended renderQ that works for random/review (no babId)
+function renderQEx(){
+  const w=G.queue[G.cur];
+  if(!w){showDone();return;}
+  G.answered=false;updProg();setBtn('PERIKSA','green',true);
+  const bd=document.getElementById('gbody');bd.innerHTML='';
+  const pool=G._allWords||BABS.flatMap(b=>b.words);
+  const m=G.mode;
+  if(m==='flip')renderFlip(w,bd);
+  else if(m==='mcq')renderMCQEx(w,bd,pool);
+  else if(m==='typing')renderTyping(w,bd);
+  else if(m==='visual')renderVisualEx(w,bd,pool);
+  else if(m==='listen')renderListenEx(w,bd,pool);
+  else if(m==='order')renderOrder(w,bd);
+}
+
+function renderMCQEx(w,el,pool){
+  const others=pool.filter(x=>x[0]!==w[0]);
+  const opts=shuf([w,...shuf(others).slice(0,3)]);
+  const lbls=['A','B','C','D'];
+  el.innerHTML=`<div class="qbadge">🎯 Pilihan Ganda</div>
+    <div class="wcard">${imgTag(w,76)}<div class="wjp">${w[0]}</div><div class="wroma">${w[1]}</div></div>
+    <div class="qtxt">Apa artinya?</div>
+    <div class="opts">
+      ${opts.map((o,i)=>`<button class="opt" data-a="${o[2]}" onclick="pickMCQ(this,'${o[2]}','${w[2]}')">${'<div class="olbl">'+lbls[i]+'</div><span>'+o[2]+'</span>'}</button>`).join('')}
+    </div>`;
+}
+function renderVisualEx(w,el,pool){
+  const others=pool.filter(x=>x[0]!==w[0]);
+  const opts=shuf([w,...shuf(others).slice(0,3)]);
+  el.innerHTML=`<div class="qbadge">🖼️ Visual Match</div>
+    <div class="qtxt" style="font-size:17px;font-weight:900;text-align:center;margin-bottom:14px;">Mana yang artinya <span style="color:var(--yellow)">"${w[2]}"</span>?</div>
+    <div class="vgrid">
+      ${opts.map(o=>`<div class="vtile" data-jp="${o[0]}" onclick="pickVis(this,'${o[0]}','${w[0]}')">
+        <img src="${wimg(o,52)}" width="52" height="52" onerror="this.style.display='none'" loading="lazy" style="display:block;margin:0 auto 8px;border-radius:8px;object-fit:contain;">
+        <div class="vtjp">${o[0]}</div><div class="vtroma">${o[1]}</div>
+      </div>`).join('')}
+    </div>`;
+}
+function renderListenEx(w,el,pool){
+  const others=pool.filter(x=>x[0]!==w[0]);
+  const opts=shuf([w,...shuf(others).slice(0,3)]);
+  const lbls=['A','B','C','D'];
+  el.innerHTML=`<div class="qbadge">🔊 Dengarkan</div>
+    <div class="qtxt">Dengarkan dan pilih artinya!</div>
+    <div class="lcard" onclick="spk('${w[0]}')"><div class="lico">🔊</div><div class="llbl">Ketuk untuk dengar</div></div>
+    <div class="opts">
+      ${opts.map((o,i)=>`<button class="opt" data-a="${o[2]}" onclick="pickMCQ(this,'${o[2]}','${w[2]}')">${'<div class="olbl">'+lbls[i]+'</div><span>'+o[2]+'</span>'}</button>`).join('')}
+    </div>`;
+  setTimeout(()=>spk(w[0]),500);
+}
+
+// Patch nextQ and restartGame for random/review mode
+const _nextQ=nextQ;
+nextQ=function(){
+  G.cur++;
+  G.cur>=G.queue.length?showDone():(G.babId===null?renderQEx():renderQ());
+};
+const _restart=restartGame;
+restartGame=function(){
+  if(G.babId===null){
+    G.queue=shuf([...G.queue.concat()]).slice(0,15);
+    G.cur=0;G.xp=0;G.answered=false;G.sessionOk=0;G.sessionTotal=0;G.startTime=Date.now();
+    showScr('s-game');updProg();renderQEx();
+  } else { _restart(); }
+};
+
+// ==================== STATISTICS ====================
+function showStats(){
+  showScr('s-stats');
+  const avgProg=Math.round(BABS.reduce((s,b)=>s+(babProg[b.id]||0),0)/BABS.length);
+  const babsDone=BABS.filter(b=>(babProg[b.id]||0)>=50).length;
+  const body=document.getElementById('stats-body');
+  body.innerHTML=`
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px;">
+      <div style="background:var(--card);border-radius:14px;padding:16px;text-align:center;border:1.5px solid var(--border);">
+        <div style="font-size:28px;font-weight:900;color:var(--yellow)">${gXP}</div>
+        <div style="font-size:11px;color:var(--text2);font-weight:800;text-transform:uppercase;margin-top:4px;">Total XP</div>
+      </div>
+      <div style="background:var(--card);border-radius:14px;padding:16px;text-align:center;border:1.5px solid var(--border);">
+        <div style="font-size:28px;font-weight:900;color:var(--green)">${gOk}</div>
+        <div style="font-size:11px;color:var(--text2);font-weight:800;text-transform:uppercase;margin-top:4px;">Total Benar</div>
+      </div>
+      <div style="background:var(--card);border-radius:14px;padding:16px;text-align:center;border:1.5px solid var(--border);">
+        <div style="font-size:28px;font-weight:900;color:var(--blue)">${gWrd}</div>
+        <div style="font-size:11px;color:var(--text2);font-weight:800;text-transform:uppercase;margin-top:4px;">Kata Dipelajari</div>
+      </div>
+      <div style="background:var(--card);border-radius:14px;padding:16px;text-align:center;border:1.5px solid var(--border);">
+        <div style="font-size:28px;font-weight:900;color:#CE82FF">${wrongWords.length}</div>
+        <div style="font-size:11px;color:var(--text2);font-weight:800;text-transform:uppercase;margin-top:4px;">Kata Salah</div>
+      </div>
+    </div>
+    <div style="background:var(--card);border-radius:14px;padding:16px;margin-bottom:20px;border:1.5px solid var(--border);">
+      <div style="font-size:13px;font-weight:800;color:var(--text2);margin-bottom:10px;">Progress Keseluruhan</div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+        <span style="font-size:14px;font-weight:700;">Rata-rata</span>
+        <span style="font-size:14px;font-weight:900;color:var(--green)">${avgProg}%</span>
+      </div>
+      <div style="height:10px;background:rgba(255,255,255,.08);border-radius:5px;overflow:hidden;">
+        <div style="height:100%;width:${avgProg}%;background:linear-gradient(90deg,var(--green),#7CEC3A);border-radius:5px;"></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;margin-top:8px;font-size:12px;color:var(--text2);font-weight:600;">
+        <span>${babsDone} bab selesai (≥50%)</span><span>${BABS.length} total bab</span>
+      </div>
+    </div>
+    <div style="font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.1em;color:var(--text3);margin-bottom:10px;">Progress Per Bab</div>
+    <div style="display:flex;flex-direction:column;gap:8px;">
+      ${BABS.map(b=>{
+        const p=babProg[b.id]||0;
+        return `<div style="background:var(--card);border-radius:12px;padding:12px 14px;border:1.5px solid var(--border);display:flex;align-items:center;gap:12px;cursor:pointer;" onclick="showScr('s-home');renderHome();setTimeout(()=>startBab(${b.id}),100)">
+          <div style="width:36px;height:36px;border-radius:10px;background:${b.col}22;color:${b.col};display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;flex-shrink:0;">${b.id}</div>
+          <div style="flex:1;min-width:0;">
+            <div style="font-size:13px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${b.name}: ${b.desc}</div>
+            <div style="height:4px;background:rgba(255,255,255,.08);border-radius:3px;margin-top:6px;overflow:hidden;">
+              <div style="height:100%;width:${p}%;background:${b.col};border-radius:3px;"></div>
+            </div>
+          </div>
+          <div style="font-size:12px;font-weight:900;color:${b.col};flex-shrink:0;">${p}%</div>
+        </div>`;
+      }).join('')}
+    </div>
+  `;
+}
+
+// ==================== RESET ====================
+function confirmReset(){
+  if(confirm('Reset semua progress? Data XP, benar, dan progress bab akan dihapus.')){
+    gXP=0;gOk=0;gWrd=0;babProg={};wrongWords=[];
+    localStorage.removeItem('nhf3');
+    localStorage.removeItem('nhf3_wrong');
+    renderHome();
+  }
+}
+
+// ==================== UPDATE HOME with review count ====================
+const _origRenderHome=renderHome;
+renderHome=function(){
+  _origRenderHome();
+  const el=document.getElementById('review-cnt');
+  if(el) el.textContent=wrongWords.length;
+};
+
+renderHome();
+</script>
+</body>
+</html>
+
